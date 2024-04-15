@@ -32,7 +32,7 @@ export class AlumnosDialogComponent {
   constructor (
     private fb: FormBuilder,
     private matDialogRef: MatDialogRef<AlumnosDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private editingStudent?: IStudent
+    @Inject(MAT_DIALOG_DATA) public editingStudent?: IStudent
   ) {
     this.studentForm = this.fb.group({
       firstName: [
