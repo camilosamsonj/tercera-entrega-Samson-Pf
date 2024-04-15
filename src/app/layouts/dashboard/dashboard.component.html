@@ -1,0 +1,35 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer style="padding: 2rem"
+    [opened]="!isMobile()"
+    #drawer
+    class="example-sidenav"
+    [mode]="isMobile() ? 'over' : 'side'"
+>
+    
+    <mat-list>
+        <a mat-list-item> Inicio </a>
+        <a mat-list-item> Usuarios </a>
+        <a mat-list-item> Clases </a>
+    </mat-list>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+        <mat-toolbar color="primary">
+            <button
+            (click)="drawer.toggle()"
+            mat-icon-button
+            class="example-icon"
+            aria-label="Example icon-button with menu icon"
+        >
+            <mat-icon>menu</mat-icon>        
+            </button>
+            <span>My Application</span>
+        </mat-toolbar>
+
+        <main style="padding: 1rem">
+
+            <app-alumnos></app-alumnos>
+            
+        </main>
+    </div>
+</mat-drawer-container>

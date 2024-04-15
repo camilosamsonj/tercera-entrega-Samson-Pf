@@ -1,0 +1,59 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule} from '@angular/material/list';
+import { MatTableModule} from '@angular/material/table';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-errors.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule} from '@angular/material/select';
+
+
+
+
+
+
+
+@NgModule({
+  declarations: [
+    FormFieldValidationErrorsPipe,
+  ],
+  imports: [
+    CommonModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatListModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+
+    
+  ],
+  exports: [
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatListModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+  ]
+})
+export class SharedModule { }

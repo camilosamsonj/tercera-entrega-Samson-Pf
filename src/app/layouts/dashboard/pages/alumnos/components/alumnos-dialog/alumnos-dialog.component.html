@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>Crear usuario</h2>
+<div mat-dialog-content>
+  <!-- Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates nam quas
+  repellendus culpa deleniti error vel id accusamus placeat aut et excepturi,
+  voluptatem harum officia ipsa modi provident mollitia exercitationem. -->
+
+  <form [formGroup]="studentForm">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field 
+        class="w-100 p-2" 
+        appearance="fill"
+        >
+          <mat-label>Nombre</mat-label>
+          <input matInput
+          formControlName="firstName" 
+           />
+          <mat-hint>Ingrese el nombre del alumno</mat-hint>
+          <mat-error *ngIf="firstNameControl?.invalid && firstNameControl?.touched">
+            <span *ngIf="firstNameControl?.errors?.['required']">Este es un campo obligatorio</span>
+            <span *ngIf="firstNameControl?.errors?.['pattern']"> El nombre debe contener solo letras</span>
+            <span *ngIf="firstNameControl?.errors?.['minlength']"> Debe contener al menos 2 caracteres</span>
+          </mat-error>
+            
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field 
+        class="w-100 p-2" 
+        appearance="fill"
+        >
+          <mat-label>Apellido</mat-label>
+          <input 
+          formControlName="lastName" 
+          matInput />
+          <mat-hint>Ingrese el apellido del alumno</mat-hint>
+          <mat-error *ngIf="lastNameControl?.invalid && lastNameControl?.touched">
+            <span *ngIf="lastNameControl?.errors?.['required']"> Este es un campo obligatorio </span>
+            <span *ngIf="lastNameControl?.errors?.['pattern']"> El apellido debe contener solo letras</span>
+            <span *ngIf="lastNameControl?.errors?.['minlength']">Debe contener al menos 2 caracteres</span>
+          </mat-error>
+          </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field 
+        class="w-100 p-2" 
+        appearance="fill"
+        >
+          <mat-label>Email</mat-label>
+          <input 
+          formControlName="email" 
+          matInput />
+          <mat-hint>Correo electrónico del alumno</mat-hint>
+          <mat-error *ngIf="emailControl?.invalid && emailControl?.touched">
+            <span *ngIf="emailControl?.errors?.['required']"> Este es un campo obligatorio </span>
+            <span *ngIf="emailControl?.errors?.['email']"> Ingrese un email válido</span>
+            <span *ngIf="emailControl?.errors?.['pattern']">La dirección de correo no es válida</span>
+          </mat-error>
+          </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field 
+        class="w-100 p-2" 
+        appearance="fill"
+        >
+          <mat-label>Año de Ingreso</mat-label>
+          <mat-select 
+          formControlName="anoIngreso" 
+          >
+            <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+          </mat-select> 
+          <mat-hint>Seleccione el año de ingreso</mat-hint>
+          <mat-error *ngIf="anoIngresoControl?.invalid && anoIngresoControl?.touched">
+            <span *ngIf="anoIngresoControl?.errors?.['required']">Debe seleccionar un año de ingreso</span>            
+          </mat-error>
+          </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="d-flex justify-content-end" mat-dialog-actions>
+  <button mat-dialog-close mat-button>Cancelar</button>
+  <button (click)="onSave()" mat-button >Guardar</button>
+</div>
