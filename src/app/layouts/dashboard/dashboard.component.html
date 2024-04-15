@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-container" autosize>
-    <mat-drawer style="padding: 2rem"
+    <mat-drawer class="mt-2"
     [opened]="!isMobile()"
     #drawer
     class="example-sidenav"
@@ -7,23 +7,24 @@
 >
     
     <mat-list>
-        <a mat-list-item> Inicio </a>
-        <a mat-list-item> Usuarios </a>
-        <a mat-list-item> Clases </a>
+        <a class="custom-matlist-item-hover" mat-list-item> <mat-icon matListItemIcon>home</mat-icon> Inicio </a>
+        <a class="custom-matlist-item-hover" mat-list-item> <mat-icon matListItemIcon>people</mat-icon> Usuarios </a>
+        <a class="custom-matlist-item-hover" mat-list-item> <mat-icon matListItemIcon>book</mat-icon> Clases </a> 
+
     </mat-list>
     </mat-drawer>
 
     <div class="example-sidenav-content">
-        <mat-toolbar color="primary">
+        <mat-toolbar class="custom-toolbar">
             <button
             (click)="drawer.toggle()"
             mat-icon-button
             class="example-icon"
             aria-label="Example icon-button with menu icon"
         >
-            <mat-icon>menu</mat-icon>        
+            <mat-icon style="color: white">menu</mat-icon>        
             </button>
-            <span>My Application</span>
+            <span style="color: white">My Application</span>
         </mat-toolbar>
 
         <main style="padding: 1rem">

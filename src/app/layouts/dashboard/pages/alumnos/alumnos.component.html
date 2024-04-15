@@ -2,11 +2,11 @@
 <div class="d-flex justify-content-end mb-3">
   <button (click)="openDialog()"
 mat-button color="primary">
-    Crear usuario <mat-icon>add</mat-icon>
+    Crear usuario <mat-icon>person_add</mat-icon>
   </button>
 </div>
 
-<table class="d-flex" mat-table [dataSource]="students" class="mat-elevation-z8">
+<table id="custom-table" class="d-flex mat-elevation-z8 table-hover" mat-table [dataSource]="students" class="mat-elevation-z8">
 
   
     <!--ID Column -->
@@ -57,7 +57,7 @@ mat-button color="primary">
       </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row-hover"></tr>
   </table>
   
   
