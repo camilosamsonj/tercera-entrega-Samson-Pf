@@ -1,36 +1,43 @@
-<mat-drawer-container class="example-container" autosize>
-    <mat-drawer class="mt-2"
-    [opened]="!isMobile()"
-    #drawer
-    class="example-sidenav"
-    [mode]="isMobile() ? 'over' : 'side'"
->
-    
-    <mat-list>
-        <a class="custom-matlist-item-hover" mat-list-item> <mat-icon matListItemIcon>home</mat-icon> Inicio </a>
-        <a class="custom-matlist-item-hover" mat-list-item> <mat-icon matListItemIcon>people</mat-icon> Usuarios </a>
-        <a class="custom-matlist-item-hover" mat-list-item> <mat-icon matListItemIcon>book</mat-icon> Clases </a> 
-
-    </mat-list>
-    </mat-drawer>
-
-    <div class="example-sidenav-content">
-        <mat-toolbar class="custom-toolbar">
-            <button
-            (click)="drawer.toggle()"
-            mat-icon-button
-            class="example-icon"
-            aria-label="Example icon-button with menu icon"
+  <!-- TOOLBAR  -->
+  <div class="toolbar-container">
+    <mat-toolbar class="custom-toolbar">
+      <div class="example-button-container">
+        <button
+          (click)="drawer.toggle()"
+          mat-mini-fab
+          class="menu-button"
+          aria-label="menu icon"
         >
-            <mat-icon style="color: white">menu</mat-icon>        
-            </button>
-            <span style="color: white">Panel de Administración</span>
-        </mat-toolbar>
+          <mat-icon class="menu-button-icon">menu</mat-icon>
+    
+        </button>
+      </div>
 
-        <main style="padding: 1rem">
+      <span style="color: white">Panel de Administración</span>
+    </mat-toolbar>
 
-            <app-alumnos></app-alumnos>
-            
-        </main>
-    </div>
+  </div>
+<mat-drawer-container class="custom-mat-drawer-container" autosize>
+  <mat-drawer
+    #drawer
+   
+  >
+    <mat-list>
+      <a (click)="drawer.mode === 'over' &&  drawer.toggle()" class="custom-matlist-item-hover" mat-list-item>
+        <mat-icon matListItemIcon>home </mat-icon>
+        Inicio
+      </a>
+      <a (click)="drawer.mode === 'over' &&  drawer.toggle()" class="custom-matlist-item-hover" mat-list-item>
+        <mat-icon matListItemIcon>people</mat-icon> Usuarios
+      </a>
+      <a (click)="drawer.mode === 'over' &&  drawer.toggle()" class="custom-matlist-item-hover" mat-list-item>
+        <mat-icon matListItemIcon>book</mat-icon> Clases
+      </a>
+    </mat-list>
+  </mat-drawer>
+
+
+  <main style="padding: 1rem">
+    <app-alumnos></app-alumnos>
+  </main>
 </mat-drawer-container>

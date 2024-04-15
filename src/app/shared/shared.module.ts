@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-errors.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule} from '@angular/material/select';
+import { LayoutModule} from '@angular/cdk/layout'
 
 
 
@@ -38,6 +39,7 @@ import { MatSelectModule} from '@angular/material/select';
     MatDialogModule,
     BrowserAnimationsModule,
     MatSelectModule,
+    LayoutModule,
 
     
   ],
@@ -54,6 +56,7 @@ import { MatSelectModule} from '@angular/material/select';
     MatDialogModule,
     BrowserAnimationsModule,
     MatSelectModule,
+    LayoutModule
   ]
 })
 export class SharedModule { }

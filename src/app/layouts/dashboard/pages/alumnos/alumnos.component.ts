@@ -126,7 +126,10 @@ openDialog(editingStudent?: IStudent): void {
 }
        
 onDeleteStudent(id: number): void {
-    this.students = this.students.filter((student) => student.id !== id);
+    if (confirm('¿Está seguro de eliminar este alumno?')){
+        this.students = this.students.filter((student) => student.id !== id);
+    }
+    
   }
 }
 

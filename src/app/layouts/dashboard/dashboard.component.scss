@@ -1,6 +1,22 @@
 .custom-toolbar {
     background-color: black;
-}
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ajusta el z-index según sea necesario para evitar que se superponga con otros elementos */
+  }
+
+.custom-mat-drawer-container {
+    padding-top: 64px; /* Ajusta esto para dejar espacio para el toolbar fijo */
+  }
+
+mat-drawer {
+    position: fixed;
+    top: 64px; /* Ajusta esto para que coincida con la altura de la barra de herramientas */
+    bottom: 0;
+    z-index: 999; /* Ajusta el z-index según sea necesario para evitar que se superponga con otros elementos */
+    width: 200px; /* Ajusta el ancho del drawer según tus necesidades */
+  }
 
 .custom-matlist-item-hover {
     transition: background-color 0.5s ease;
@@ -17,3 +33,18 @@
     background-color: lightgray;
 }
 
+.example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+
+.menu-button {
+    color: white;
+    background-color: gray;
+}
+
+.menu-button:hover {
+    background-color: lightgrey;
+    color: black;
+}
