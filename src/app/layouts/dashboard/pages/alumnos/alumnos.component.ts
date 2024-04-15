@@ -104,27 +104,7 @@ export class AlumnosComponent {
 constructor(private matDialog: MatDialog) {}
 
 
-// openDialog(editingStudent?: IStudent): void {
-//     this.matDialog
-//     .open(AlumnosDialogComponent, {
-//         data: editingStudent,
-//     })
-//     .afterClosed()
-//     .subscribe({
-//         next: (result) => {
-//             if (result) {
-//                 if (editingStudent) {
-//                     this.students = this.students.map((student) =>
-//                     student.id === editingStudent.id ? { ...student, ...result } : student);
-//                 } else {
-//                     this.students.push({ id: this.students.length + 1, ... result});
-//                 }
-//             }
-//         }
-//     });
-// }
-
-
+    
 openDialog(editingStudent?: IStudent): void {
 
     const dialogRef = this.matDialog.open(AlumnosDialogComponent, {
@@ -136,14 +116,14 @@ openDialog(editingStudent?: IStudent): void {
                 this.students = this.students.map((student) =>
                     student.id === editingStudent.id ? { ...student, ...result } : student);
             } else {
-                let currentId = this.students.length;
-                result.id = currentId + 1;
+                let maxId = this.students.reduce((max, student) => (student.id > max ? student.id : max), 0);
+                // Asignar un nuevo ID incrementando el máximo en 1
+                result.id = maxId + 1;
                 this.students = [...this.students, result];
             }
         }
     }); 
 }
-    
        
 onDeleteStudent(id: number): void {
     this.students = this.students.filter((student) => student.id !== id);
