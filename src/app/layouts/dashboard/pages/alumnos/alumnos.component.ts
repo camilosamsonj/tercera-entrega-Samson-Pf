@@ -94,8 +94,7 @@ export class AlumnosComponent {
           lastName: "La Cerva",
           email: "adriana.lacerva@newyork.com",
           anoIngreso: 2022,
-      
-      }
+    }
       
       ];
 

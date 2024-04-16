@@ -18,7 +18,7 @@ color="basic">
   class="mat-elevation-z8"
   >
 
-
+<!-- ID COLUMN -->
       <ng-container 
       matColumnDef="id">
         <th 
@@ -31,7 +31,8 @@ color="basic">
         #{{student.id}} 
       </td>
       </ng-container>
-    
+
+<!-- FIRST NAME COLUMN  -->
 
       <ng-container 
       matColumnDef="firstName"
@@ -46,7 +47,9 @@ color="basic">
         {{student.firstName}} 
       </td>
       </ng-container>
-    
+
+
+    <!-- LAST NAME COLUMN  -->
  
       <ng-container 
       matColumnDef="lastName">
@@ -62,7 +65,8 @@ color="basic">
         </ng-container>
       
   
-    
+     <!-- EMAIL COLUMN  -->
+
       <ng-container 
       matColumnDef="email">
           <th 
@@ -76,6 +80,7 @@ color="basic">
       </ng-container>
       
   
+       <!-- AÑO DE INGRESO COLUMN  -->
     
       <ng-container 
       matColumnDef="anoIngreso">
@@ -90,6 +95,8 @@ color="basic">
         </td>
       </ng-container> 
   
+      <!-- ACTIONS COLUMN  -->
+
       <ng-container 
       matColumnDef="actions"
       >

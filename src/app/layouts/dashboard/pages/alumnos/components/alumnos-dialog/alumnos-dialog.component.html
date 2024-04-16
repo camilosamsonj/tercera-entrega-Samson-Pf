@@ -4,81 +4,67 @@
 <ng-template #crearAlumno>
   <h2 mat-dialog-title>Crear Alumno</h2></ng-template>
 
-<div mat-dialog-content>
+  <div mat-dialog-content>
   
-  <form [formGroup]="studentForm">
-    <div class="row">
-      <div class="col-6">
-        <mat-form-field 
-        class="w-100 p-2" 
-        appearance="outline"
-        >
-          <mat-label>Nombre</mat-label>
-          <input matInput
-          formControlName="firstName" 
-           />
-          
-          <mat-error *ngIf="firstNameControl?.invalid && firstNameControl?.touched">
-            <span *ngIf="firstNameControl?.errors?.['required']">Este es un campo obligatorio</span>
-            <span *ngIf="firstNameControl?.errors?.['pattern']"> El nombre debe contener solo letras</span>
-            <span *ngIf="firstNameControl?.errors?.['minlength']"> Debe contener al menos 2 caracteres</span>
-          </mat-error>
-            
-        </mat-form-field>
-      </div>
-      <div class="col-6">
-        <mat-form-field 
-        class="w-100 p-2" 
-        appearance="outline"
-        >
-          <mat-label>Apellido</mat-label>
-          <input 
-          formControlName="lastName" 
-          matInput />
-          <mat-error *ngIf="lastNameControl?.invalid && lastNameControl?.touched">
-            <span *ngIf="lastNameControl?.errors?.['required']"> Este es un campo obligatorio </span>
-            <span *ngIf="lastNameControl?.errors?.['pattern']"> El apellido debe contener solo letras</span>
-            <span *ngIf="lastNameControl?.errors?.['minlength']">Debe contener al menos 2 caracteres</span>
-          </mat-error>
+    <form [formGroup]="studentForm">
+      <div class="row">
+        <div [ngClass]="{'col-6': !isMobile(), 'col-12': isMobile() }">
+          <mat-form-field 
+            class="w-100 p-2" 
+            appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="firstName" />
+            <mat-error *ngIf="firstNameControl?.invalid && firstNameControl?.touched">
+              <span *ngIf="firstNameControl?.errors?.['required']">Este es un campo obligatorio</span>
+              <span *ngIf="firstNameControl?.errors?.['pattern']">El nombre debe contener solo letras</span>
+              <span *ngIf="firstNameControl?.errors?.['minlength']">Debe contener al menos 2 caracteres</span>
+            </mat-error>
           </mat-form-field>
-      </div>
-      <div class="col-6">
-        <mat-form-field 
-        class="w-100 p-2" 
-        appearance="outline"
-        >
-          <mat-label>Email</mat-label>
-          <input 
-          formControlName="email" 
-          matInput 
-          placeholder="ejemplo@email.com" />
-          <mat-error *ngIf="emailControl?.invalid && emailControl?.touched">
-            <span *ngIf="emailControl?.errors?.['required']"> Este es un campo obligatorio </span>
-            <span *ngIf="emailControl?.errors?.['email']"> Ingrese un email válido</span>
-            <span *ngIf="emailControl?.errors?.['pattern']">La dirección de correo no es válida</span>
-          </mat-error>
+        </div>
+        <div [ngClass]="{'col-6': !isMobile(), 'col-12': isMobile() }">
+          <mat-form-field 
+            class="w-100 p-2" 
+            appearance="outline">
+            <mat-label>Apellido</mat-label>
+            <input formControlName="lastName" matInput />
+            <mat-error *ngIf="lastNameControl?.invalid && lastNameControl?.touched">
+              <span *ngIf="lastNameControl?.errors?.['required']">Este es un campo obligatorio</span>
+              <span *ngIf="lastNameControl?.errors?.['pattern']">El apellido debe contener solo letras</span>
+              <span *ngIf="lastNameControl?.errors?.['minlength']">Debe contener al menos 2 caracteres</span>
+            </mat-error>
           </mat-form-field>
-      </div>
-      <div class="col-6">
-        <mat-form-field 
-        class="w-100 p-2" 
-        appearance="outline"
-        >
-          <mat-label>Año de Ingreso</mat-label>
-          <mat-select 
-          formControlName="anoIngreso" 
-          >
-            <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
-          </mat-select> 
-          
-          <mat-error *ngIf="anoIngresoControl?.invalid && anoIngresoControl?.touched">
-            <span *ngIf="anoIngresoControl?.errors?.['required']">Debe seleccionar un año de ingreso</span>            
-          </mat-error>
+        </div>
+        <div [ngClass]="{'col-6': !isMobile(), 'col-12': isMobile() }">
+          <mat-form-field 
+            class="w-100 p-2" 
+            appearance="outline">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput placeholder="ejemplo@email.com" />
+            <mat-error *ngIf="emailControl?.invalid && emailControl?.touched">
+              <span *ngIf="emailControl?.errors?.['required']">Este es un campo obligatorio</span>
+              <span *ngIf="emailControl?.errors?.['email']">Ingrese un email válido</span>
+              <span *ngIf="emailControl?.errors?.['pattern']">La dirección de correo no es válida</span>
+            </mat-error>
           </mat-form-field>
+        </div>
+        <div [ngClass]="{'col-6': !isMobile(), 'col-12': isMobile() }">
+          <mat-form-field 
+            class="w-100 p-2" 
+            appearance="outline">
+            <mat-label>Año de Ingreso</mat-label>
+            <mat-select formControlName="anoIngreso">
+              <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+            </mat-select> 
+            <mat-error *ngIf="anoIngresoControl?.invalid && anoIngresoControl?.touched">
+              <span *ngIf="anoIngresoControl?.errors?.['required']">Debe seleccionar un año de ingreso</span>            
+            </mat-error>
+          </mat-form-field>
+        </div>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+  
+
 <div class="d-flex justify-content-end" mat-dialog-actions>
   <button mat-dialog-close mat-button>Cancelar</button>
   <button (click)="onSave()" mat-button >Guardar</button>

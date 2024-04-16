@@ -10,6 +10,10 @@ import { IStudent} from '../../models';
 })
 export class AlumnosDialogComponent {
 
+  isMobile(): boolean {
+    return window.innerWidth < 768;
+  }
+
   studentForm: FormGroup;
   years: number[] = [
     2010, 
