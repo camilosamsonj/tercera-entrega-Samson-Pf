@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IStudent } from './models';
 import { MatDialog } from '@angular/material/dialog';
 import { AlumnosDialogComponent } from './components/alumnos-dialog/alumnos-dialog.component';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 
 
@@ -101,7 +102,16 @@ export class AlumnosComponent {
   
 
 
-constructor(private matDialog: MatDialog) {}
+constructor(private matDialog: MatDialog, private breakingpointObsver: BreakpointObserver) {
+    this.breakingpointObsver.observe([Breakpoints.Handset])
+    .subscribe(res => {
+        if (res.matches) {
+            this.displayedColumns = ['id', 'firstName', 'actions'];
+        } else {
+            this.displayedColumns = ['id', 'firstName', 'lastName', 'email', 'anoIngreso', 'actions'];
+        }
+    });
+}
 
 
     
