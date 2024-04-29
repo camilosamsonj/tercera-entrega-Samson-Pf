@@ -52,31 +52,31 @@ getCoursesPromise(): Promise<ICourses[]> {
     const coursesData: ICourses[] = [
       {
         code: 1,
-        name: 'Angular',
+        name: 'MongoDB',
         startDate: new Date(),
-        durationMonths: 6,
-        instructor: 'Josue Baez',
+        durationMonths: 4,
+        instructor: 'Juan Pérez',
       },
       {
         code: 2,
-        name: 'Python',
+        name: 'C++',
         startDate: new Date(),
-        durationMonths: 4,
-        instructor: 'Mauricio Cuello',
+        durationMonths: 5,
+        instructor: 'Rolando Gutierrez',
       },
       {
         code: 3,
-        name: 'React',
+        name: 'Vue',
         startDate: new Date(),
-        durationMonths: 5,
-        instructor: 'Ana García',
+        durationMonths: 4,
+        instructor: 'Ignacio Rojas',
       },
       {
         code: 4,
-        name: 'SQL y Bases de Datos',
+        name: 'UX/UI',
         startDate: new Date(),
         durationMonths: 7,
-        instructor: 'María Rodríguez',
+        instructor: 'María González',
       },   
     ];
     resolve(coursesData);
