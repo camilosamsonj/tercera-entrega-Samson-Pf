@@ -11,7 +11,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-errors.pipe';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule} from '@angular/material/select';
 import { LayoutModule} from '@angular/cdk/layout'
 
@@ -37,7 +36,6 @@ import { LayoutModule} from '@angular/cdk/layout'
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    BrowserAnimationsModule,
     MatSelectModule,
     LayoutModule,
 
@@ -54,7 +52,6 @@ import { LayoutModule} from '@angular/cdk/layout'
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    BrowserAnimationsModule,
     MatSelectModule,
     LayoutModule
   ]
