@@ -6,10 +6,17 @@ import { CursosRoutingModule } from './cursos-routing.module';
 
 
 
+
 @NgModule({
   declarations: [CursosComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule,
+    CursosRoutingModule,
+  ],
+  exports: [
+    CursosComponent,
   ]
 })
 export class CursosModule { }
+
