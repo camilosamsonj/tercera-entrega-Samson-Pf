@@ -42,19 +42,27 @@ export class AlumnosComponent implements OnInit {
     });
   }
 
+  // ngOnInit(): void {
+  //   this.students$ = this.alumnosService.getAlumnos().pipe(
+  //     map((alumnosData: IStudent[]) => {
+  //       return alumnosData.map((alumnosData) => {
+  //         return {
+  //           ...alumnosData,
+  //         };
+  //       });
+  //     })
+  //   );
+  // }
   ngOnInit(): void {
-    this.students$ = this.alumnosService.getAlumnos().pipe(
-      map((alumnosData: IStudent[]) => {
-        return alumnosData.map((alumnosData) => {
-          return {
-            ...alumnosData,
-          };
-        });
-      })
-    );
+    this.alumnosService.getAlumnos().subscribe({
+      next: (alumnosData: IStudent[]) => {
+        this.students$ = of(alumnosData);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
-
-  ngOnDestroy(): void {}
 
   openDialog(editingStudent?: IStudent): void {
     const dialogRef = this.matDialog.open(AlumnosDialogComponent, {

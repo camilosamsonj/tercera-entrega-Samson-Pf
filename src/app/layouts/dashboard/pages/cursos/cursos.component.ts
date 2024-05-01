@@ -12,7 +12,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   templateUrl: './cursos.component.html',
   styleUrls: ['./cursos.component.scss'],
 })
-export class CursosComponent implements OnInit, OnDestroy {
+export class CursosComponent implements OnInit {
   displayedColumns: string[] = [
     'code',
     'name',
@@ -39,19 +39,18 @@ export class CursosComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit(): void {
-    this.courses$ = this.coursesService.getCourses().pipe(
-      map((coursesData: ICourse[]) => {
-        return coursesData.map((coursesData) => {
-          return {
-            ...coursesData,
-          };
-        });
-      })  
-    );
+   this.coursesService.getCourses().subscribe({
+    next: (coursesData: ICourse[]) => {
+      this.courses$ = of(coursesData);
+    },
+    error: (error) => {
+      console.log(error);
+    }
+
+   })
   }
 
 
-  ngOnDestroy(): void {}
 
   openDialog(editingCourse?: ICourse): void {
     const dialogRef = this.matDialog.open(CursosDialogComponent, {
