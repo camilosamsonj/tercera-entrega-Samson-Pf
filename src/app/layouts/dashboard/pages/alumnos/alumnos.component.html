@@ -9,10 +9,13 @@ color="basic">
   </button>
 </div>
 
-<table id="custom-table" 
-  class="d-flex mat-elevation-z8 table-hover" 
-  mat-table 
-  [dataSource]="students" 
+<table 
+*ngIf="students$ | async as students"
+[dataSource]="students"
+id="custom-table" 
+class="d-flex mat-elevation-z8 table-hover" 
+mat-table 
+   
   class="mat-elevation-z8"
   >
 
