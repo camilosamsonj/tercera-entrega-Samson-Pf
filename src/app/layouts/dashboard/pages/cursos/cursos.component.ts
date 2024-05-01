@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ICourse } from './models';
 import { CursosService } from './cursos.service';
-import { Observable, Observer, of, take, map } from 'rxjs';
+import { Observable, Observer, of, take, map, delay } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CursosDialogComponent } from './components/cursos-dialog/cursos-dialog.component';
 import Swal from 'sweetalert2';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
 
 @Component({
   selector: 'app-cursos',
@@ -22,7 +23,7 @@ export class CursosComponent implements OnInit {
     'actions',
   ];
 
-
+  loading: boolean = false;
   courses$: Observable<ICourse[]>  = of([]);
 
   constructor(
@@ -39,12 +40,17 @@ export class CursosComponent implements OnInit {
     }
 
   ngOnInit(): void {
-   this.coursesService.getCourses().subscribe({
+   this.loading = true;
+   this.coursesService.getCourses().pipe(delay(900))
+   .subscribe({
     next: (coursesData: ICourse[]) => {
       this.courses$ = of(coursesData);
     },
     error: (error) => {
       console.log(error);
+    },
+    complete: () => {
+      this.loading = false;
     }
 
    })

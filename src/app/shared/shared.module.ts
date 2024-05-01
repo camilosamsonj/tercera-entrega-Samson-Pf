@@ -12,7 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-errors.pipe';
 import { MatSelectModule} from '@angular/material/select';
-import { LayoutModule} from '@angular/cdk/layout'
+import { LayoutModule} from '@angular/cdk/layout';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -38,6 +39,7 @@ import { LayoutModule} from '@angular/cdk/layout'
     MatDialogModule,
     MatSelectModule,
     LayoutModule,
+    MatProgressSpinnerModule
 
     
   ],
@@ -53,7 +55,8 @@ import { LayoutModule} from '@angular/cdk/layout'
     MatInputModule,
     MatDialogModule,
     MatSelectModule,
-    LayoutModule
+    LayoutModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class SharedModule { }

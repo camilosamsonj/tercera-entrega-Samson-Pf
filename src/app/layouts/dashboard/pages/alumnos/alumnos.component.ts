@@ -3,7 +3,7 @@ import { IStudent } from './models';
 import { MatDialog } from '@angular/material/dialog';
 import { AlumnosDialogComponent } from './components/alumnos-dialog/alumnos-dialog.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, map, of, take } from 'rxjs';
+import { Observable, delay, map, of, take } from 'rxjs';
 import { AlumnosService } from './alumnos.service';
 import Swal from 'sweetalert2';
 
@@ -25,6 +25,7 @@ export class AlumnosComponent implements OnInit {
 
 
   students$: Observable<IStudent[]> = of([]);
+  loading = false;
   // studentsSubscription: Observable<IStudent[]> | null = null;
 
   constructor(
@@ -42,24 +43,17 @@ export class AlumnosComponent implements OnInit {
     });
   }
 
-  // ngOnInit(): void {
-  //   this.students$ = this.alumnosService.getAlumnos().pipe(
-  //     map((alumnosData: IStudent[]) => {
-  //       return alumnosData.map((alumnosData) => {
-  //         return {
-  //           ...alumnosData,
-  //         };
-  //       });
-  //     })
-  //   );
-  // }
   ngOnInit(): void {
-    this.alumnosService.getAlumnos().subscribe({
+    this.loading = true;
+    this.alumnosService.getAlumnos().pipe(delay(900)).subscribe({
       next: (alumnosData: IStudent[]) => {
         this.students$ = of(alumnosData);
       },
       error: (error) => {
         console.log(error);
+      },
+      complete: () => {
+        this.loading = false;
       }
     })
   }
