@@ -25,7 +25,7 @@ export class AlumnosComponent implements OnInit {
 
 
   students$: Observable<IStudent[]> = of([]);
-  studentsSubscription: Observable<IStudent[]> | null = null;
+  // studentsSubscription: Observable<IStudent[]> | null = null;
 
   constructor(
     private matDialog: MatDialog,
@@ -74,8 +74,8 @@ export class AlumnosComponent implements OnInit {
             })
           );
           Swal.fire({
-            title: 'Cambios Aplicados!',
-            text: 'El usuario se ha editado correctamente!',
+            title: '¡Cambios Aplicados!',
+            text: '¡El usuario se ha editado correctamente!',
             icon: 'success'
           });
         } else {
@@ -86,8 +86,8 @@ export class AlumnosComponent implements OnInit {
               })
             );
             Swal.fire({
-              title: 'Usuario Guardado!',
-              text: 'El usuario se ha agregado correctamente!',
+              title: '¡Usuario Guardado!',
+              text: '¡El usuario se ha agregado correctamente!',
               icon: 'success'
             });
           }

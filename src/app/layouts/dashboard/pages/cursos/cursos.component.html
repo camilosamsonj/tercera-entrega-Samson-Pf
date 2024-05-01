@@ -1,81 +1,67 @@
-
-
-
-<div class="d-flex justifi-content-center"></div>
-<div *ngIf="!isPromiseData; else elseBlock">
-  <pre>Mostrando datos consumidos desde Courses Service (observable) </pre>
-  <button mat-button mat-flat-button color="warn" (click)="getCoursesFromPromise()">Obtener Cursos desde Promesa</button>
+<div class="d-flex justify-content-end mb-3">
+  <button (click)="openDialog()" mat-raised-button color="basic">
+    Añadir Curso
+    <mat-icon> note_add </mat-icon>
+  </button>
 </div>
-<ng-template #elseBlock > 
-  <pre>Mostrando datos consumidos desde Courses Service (promesa) </pre>
-  <button mat-button mat-flat-button color="primary" (click)="getCoursesFromObservable()">Obtener Cursos desde Observable</button>
-</ng-template>
-
-<hr>
 
 <!-- SE UTILIZA EL PIPE ASYNC PARA MOSTRAR LOS DATOS DEL OBSERVABLE -->
-<mat-table *ngIf="coursesToShow$ | async as courses" [dataSource]="courses">
-  
+<table *ngIf="courses$ | async as courses" 
+[dataSource]="courses"
+id="custom-table"
+class="d-flex mat-elevation-z8 table-hover"
+mat-table
+class="mat-elevation-z8">
+
   <!-- ID CURSO -->
   <ng-container matColumnDef="code">
-    <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
-     <!-- La propiedad 'code' se muestra como 'id', ya que fue utilizado el operador 'map' para transformarla -->
-    <mat-cell *matCellDef="let row"> {{ row.id }} </mat-cell>
+    <th mat-header-cell *matHeaderCellDef> Código </th>
+    <td mat-cell *matCellDef="let course"> # {{ course.code }} </td>
   </ng-container>
 
   <!-- NOMBRE CURSO -->
   <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let course"> {{ course.name }} </td>
   </ng-container>
 
   <!-- FECHA INICIO CURSO -->
   <ng-container matColumnDef="startDate">
-    <mat-header-cell *matHeaderCellDef> Fecha Inicio </mat-header-cell>
-    <!-- La propiedad startDate se muestra como start, ya que fue utilizado el operador 'map' para transformarla -->
-    <mat-cell *matCellDef="let row"> {{ row.start | date:'dd/MM/yyyy' }} </mat-cell>
+    <th mat-header-cell *matHeaderCellDef> Fecha Inicio </th>
+    <td mat-cell *matCellDef="let course">
+      {{ course.startDate | date : "dd/MM/yyyy" }}
+    </td>
   </ng-container>
-
 
   <!-- DURACIÓN CURSO -->
   <ng-container matColumnDef="durationMonths">
-    <mat-header-cell *matHeaderCellDef> Duración (meses) </mat-header-cell>
-    <!-- La propiedad durationMonths se muestra como duration, ya que fue utilizado el operador 'map' para transformarla -->
-    <mat-cell *matCellDef="let row"> {{ row.duration }} </mat-cell>
+    <th mat-header-cell *matHeaderCellDef> Duración (meses) </th>
+    <td mat-cell *matCellDef="let course"> {{ course.durationMonths }} </td>
   </ng-container>
 
   <!-- INSTRUCTOR CURSO -->
   <ng-container matColumnDef="instructor">
-    <mat-header-cell *matHeaderCellDef> Instructor </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{ row.instructor }} </mat-cell>
+    <th mat-header-cell *matHeaderCellDef> Instructor </th>
+    <td mat-cell *matCellDef="let course"> {{ course.instructor }} </td>
   </ng-container>
 
-  <!-- <ng-container marColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-    <mat-cell *matCellDef="let row">
-      <button mat-raised-button color="basic">
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let course">
+      <button mat-raised-button 
+      color="basic" 
+      (click)="openDialog(course)">
         <mat-icon> edit </mat-icon>
       </button>
-      <button mat-raised-button color="warn">
+      <button mat-raised-button 
+      color="warn"
+      (click)="onDeleteCourse(course.code)">
         <mat-icon> delete </mat-icon>
       </button>
-    </mat-cell>
-  </ng-container> -->
-  <!-- Header and Row Declarations -->
-  <mat-header-row
-    *matHeaderRowDef="[
-      'code',
-      'name',
-      'startDate',
-      'durationMonths',
-      'instructor',
+    </td>
+  </ng-container>
 
-    ]"
-  ></mat-header-row>
-  <mat-row
-    *matRowDef="
-      let row;
-      columns: ['code', 'name', 'startDate', 'durationMonths', 'instructor']
-    "
-  ></mat-row>
-</mat-table>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"
+  class="table-row-hover"></tr>
+</table>

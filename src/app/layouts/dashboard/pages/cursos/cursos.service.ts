@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ICourses } from './models';
+import { ICourse } from './models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class CursosService {
 
- getCoursesObservable(): Observable<ICourses[]> {
+ getCourses(): Observable<ICourse[]> {
 
-  return new Observable<ICourses[]>((observer) => {
-    const coursesData: ICourses[] = [
+  return new Observable<ICourse[]>((observer) => {
+    const coursesData: ICourse[] = [
       {
         code: 1,
         name: 'Angular',
@@ -46,42 +46,41 @@ export class CursosService {
  }
 
 
-getCoursesPromise(): Promise<ICourses[]> {
+// getCoursesPromise(): Promise<ICourse[]> {
 
-  return new Promise((resolve, reject) => {
-    const coursesData: ICourses[] = [
-      {
-        code: 1,
-        name: 'MongoDB',
-        startDate: new Date(),
-        durationMonths: 4,
-        instructor: 'Juan Pérez',
-      },
-      {
-        code: 2,
-        name: 'C++',
-        startDate: new Date(),
-        durationMonths: 5,
-        instructor: 'Rolando Gutierrez',
-      },
-      {
-        code: 3,
-        name: 'Vue',
-        startDate: new Date(),
-        durationMonths: 4,
-        instructor: 'Ignacio Rojas',
-      },
-      {
-        code: 4,
-        name: 'UX/UI',
-        startDate: new Date(),
-        durationMonths: 7,
-        instructor: 'María González',
-      },   
-    ];
-    resolve(coursesData);
-  });
+//   return new Promise((resolve, reject) => {
+//     const coursesData: ICourse[] = [
+//       {
+//         code: 1,
+//         name: 'MongoDB',
+//         startDate: new Date(),
+//         durationMonths: 4,
+//         instructor: 'Juan Pérez',
+//       },
+//       {
+//         code: 2,
+//         name: 'C++',
+//         startDate: new Date(),
+//         durationMonths: 5,
+//         instructor: 'Rolando Gutierrez',
+//       },
+//       {
+//         code: 3,
+//         name: 'Vue',
+//         startDate: new Date(),
+//         durationMonths: 4,
+//         instructor: 'Ignacio Rojas',
+//       },
+//       {
+//         code: 4,
+//         name: 'UX/UI',
+//         startDate: new Date(),
+//         durationMonths: 7,
+//         instructor: 'María González',
+//       },   
+//     ];
+//     resolve(coursesData);
+//   });
 
-  }
-
-}
+//   }
+ }
