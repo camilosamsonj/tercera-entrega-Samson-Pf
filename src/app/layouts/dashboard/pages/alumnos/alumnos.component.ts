@@ -45,7 +45,7 @@ export class AlumnosComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.alumnosService.getAlumnos().pipe(delay(900)).subscribe({
+    this.alumnosService.getAlumnos().pipe(delay(500)).subscribe({
       next: (alumnosData: IStudent[]) => {
         this.students$ = of(alumnosData);
       },

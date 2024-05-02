@@ -13,7 +13,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   templateUrl: './cursos.component.html',
   styleUrls: ['./cursos.component.scss'],
 })
-export class CursosComponent implements OnInit {
+export class CursosComponent {
   displayedColumns: string[] = [
     'code',
     'name',
@@ -37,11 +37,12 @@ export class CursosComponent implements OnInit {
           this.displayedColumns = ['code', 'name', 'startDate', 'durationMonths', 'instructor', 'actions'];
         }
       });
+      // this.courses$ = this.coursesService.getCourses();
     }
 
   ngOnInit(): void {
    this.loading = true;
-   this.coursesService.getCourses().pipe(delay(900))
+   this.coursesService.getCourses().pipe(delay(500))
    .subscribe({
     next: (coursesData: ICourse[]) => {
       this.courses$ = of(coursesData);

@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'dashboard',
+    redirectTo: 'auth',
   },
   {
     path: '**',

@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IStudent} from '../../models';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-alumnos-dialog',
@@ -95,6 +96,14 @@ export class AlumnosDialogComponent {
   onSave(): void {
     if(this.studentForm.invalid){
       this.studentForm.markAllAsTouched();
+      Swal.fire({
+        title: 'Formulario Inválido',
+        text: 'Debe completar el formulario, o ingresar datos válidos',
+        icon: 'warning',
+        timer: 1500, 
+        timerProgressBar: true, 
+        showConfirmButton: false 
+      });
     } else {
       this.matDialogRef.close(this.studentForm.value);
     }

@@ -6,6 +6,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { HomeModule } from "./pages/home/home.module";
 import { DashboardRoutingModule } from "./dashboard-routing.module";
 import { CursosModule } from "./pages/cursos/cursos.module";
+import { UsersModule } from "./pages/users/users.module";
 
 
 
@@ -18,6 +19,7 @@ import { CursosModule } from "./pages/cursos/cursos.module";
         AlumnosModule,
         DashboardRoutingModule,
         CursosModule,
+        UsersModule,
     ],
     exports: [DashboardComponent],
 })
