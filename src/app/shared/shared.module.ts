@@ -14,6 +14,7 @@ import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-err
 import { MatSelectModule} from '@angular/material/select';
 import { LayoutModule} from '@angular/cdk/layout';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCard, MatCardModule} from '@angular/material/card';
 
 
 
@@ -39,7 +40,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDialogModule,
     MatSelectModule,
     LayoutModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule,
+
 
     
   ],
@@ -57,6 +60,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatSelectModule,
     LayoutModule,
     MatProgressSpinnerModule,
+    MatCardModule,
   ]
 })
 export class SharedModule { }

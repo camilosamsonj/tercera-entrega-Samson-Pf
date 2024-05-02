@@ -44,6 +44,10 @@ export class AlumnosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   this.loadStudents();
+  }
+
+  loadStudents() {
     this.loading = true;
     this.alumnosService.getAlumnos().pipe(delay(500)).subscribe({
       next: (alumnosData: IStudent[]) => {
@@ -78,7 +82,10 @@ export class AlumnosComponent implements OnInit {
           Swal.fire({
             title: '¡Cambios Aplicados!',
             text: '¡El usuario se ha editado correctamente!',
-            icon: 'success'
+            icon: 'success',
+            timer: 1000,
+            timerProgressBar: true,
+            showConfirmButton: false  
           });
         } else {
             this.students$ = this.students$.pipe(
@@ -90,7 +97,10 @@ export class AlumnosComponent implements OnInit {
             Swal.fire({
               title: '¡Usuario Guardado!',
               text: '¡El usuario se ha agregado correctamente!',
-              icon: 'success'
+              icon: 'success',
+              timer: 1000,
+              timerProgressBar: true, 
+              showConfirmButton: false 
             });
           }
         }
@@ -113,10 +123,26 @@ export class AlumnosComponent implements OnInit {
               map((students) => students.filter((student) => student.id !== id))
             );
           }
-          Swal.fire('¡Eliminado!', 'El alumno ha sido eliminado.', 'success');
+          Swal.fire({
+            title: '¡Eliminado!', 
+            text:   'El alumno ha sido eliminado.',
+            icon:   'success',
+            timer:  1000,
+            timerProgressBar: true,
+            showConfirmButton: false
+          });
         } else if (result.isDenied) {
-          Swal.fire('Cancelado', 'El alumno está seguro :)', 'info');
-        }
-      });
+          Swal.fire({
+            title:'Cancelado',
+            text:  'El alumno está seguro',
+            icon: 'info',
+            timer: 1000,
+            timerProgressBar: true,
+            showConfirmButton: false,
+            
+          });
+          console.log('error');
+          }
+        });
   }
 }

@@ -80,15 +80,12 @@ export class AlumnosDialogComponent {
   get firstNameControl(){
     return this.studentForm.get('firstName');
   }
-
   get lastNameControl(){
     return this.studentForm.get('lastName');
   }
-
   get emailControl(){
     return this.studentForm.get('email');
   }
-
   get anoIngresoControl(){
     return this.studentForm.get('anoIngreso');
   }
