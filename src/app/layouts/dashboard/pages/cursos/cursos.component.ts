@@ -92,7 +92,6 @@ export class CursosComponent {
                 return [...courses, { ...result, code: maxCode + 1}];
               })
             );
-
           Swal.fire({
             title: 'Curso Añadido!',
             text: '¡El curso se ha agregado correctamente!',
@@ -120,11 +119,25 @@ export class CursosComponent {
             map((courses) => courses.filter((course) => course.code !== code))
           );
         }
-        Swal.fire('¡Eliminado!', 'El curso ha sido eliminado.', 'success');
-      } else if (result.isDenied){
-        Swal.fire('Cancelado', 'Ningún curso ha sido eliminado: ', 'info');
+        Swal.fire({
+          title: '¡Eliminado!', 
+          text:   'El curso ha sido eliminado.',
+          icon:   'success',
+          timer:  1000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
+      } else if (result.dismiss){
+        Swal.fire({
+            title: 'Cancelado',
+            text: 'Ningún curso fue eliminado',
+            icon: 'info',
+            timer: 1000,
+            timerProgressBar: true,
+            showConfirmButton: false,
+        });
       }
-    })
+    });
   }
 
 }

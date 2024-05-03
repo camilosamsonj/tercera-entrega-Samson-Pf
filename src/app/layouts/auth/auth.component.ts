@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import Swal from 'sweetalert2';
+import { ILoginData } from './models';
 
 @Component({
   selector: 'app-auth',
@@ -11,8 +12,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit, OnDestroy {
-  authUserChangeSubscription?: Subscription;
 
+  loginData: ILoginData = {
+    email: '',
+    password: ''
+  };
+
+  authUserChangeSubscription?: Subscription;
   authUserForm: FormGroup;
 
   constructor(
@@ -52,24 +58,33 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.authUserChangeSubscription = this.authService.authUser$.subscribe({
       next: (authUser) => {
         if (authUser != null) {
-          this.router.navigate(['dashboard', 'home']);
+          this.router.navigate(['auth']);
         }
       },
     });
   }
 
   login(): void {
-    if (this.authUserForm.invalid) {
-      this.authUserForm.markAllAsTouched();
-    } else {
-      this.authService.login();
-      Swal.fire({
-        title: 'Inicio de Sesión Exitoso',
-        icon: 'success',
-        timer: 2000,
-        timerProgressBar: true,
-        showConfirmButton: false,
-      });
-    }
+  this.authService.login(this.authUserForm.value, this.authUserForm).subscribe((loggedIn: boolean)=> {
+        if(loggedIn) {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: 'success',
+            title: 'Inicio de sesión exitoso'
+          });
+        }
+      })
+    } 
+
   }
-}
+

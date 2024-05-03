@@ -25,7 +25,7 @@
               class="w-100 p-2" 
               appearance="outline">
               <mat-label>Duración</mat-label>
-              <input formControlName="durationMonths" matInput />
+              <input formControlName="durationMonths" matInput type="number" />
               <mat-error *ngIf="durationMonthsControl?.invalid && durationMonthsControl?.touched">
                 <span *ngIf="durationMonthsControl?.errors?.['required']">Este es un campo obligatorio</span>
                 <span *ngIf="durationMonthsControl?.errors?.['pattern']">Este campo solo acepta números</span>

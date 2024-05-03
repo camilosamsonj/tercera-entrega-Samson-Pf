@@ -1,6 +1,10 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, OnDestroy } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
+import { Observable, Subscription } from 'rxjs';
+import { IUser } from './pages/users/models'
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,12 +12,21 @@ import { MatDrawer } from '@angular/material/sidenav';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(MatDrawer, {static: true})
   drawer!: MatDrawer;
 
+  authUser$ : Observable<IUser | null> ;
+  authUserSubscription?: Subscription;
 
-  constructor(private observer: BreakpointObserver) {}
+  constructor(
+    private observer: BreakpointObserver,
+    
+    private authService: AuthService,
+    private router: Router) {
+        this.authUser$ = this.authService.authUser$;
+        
+    }
 
   ngOnInit(): void {
     this.observer.observe(["(max-width: 800px)"])
@@ -25,8 +38,16 @@ export class DashboardComponent implements OnInit {
         this.drawer.mode = "side";
         this.drawer.open();
       }
-    })
+    });
+      this.authService.verifyToken();
 
+  }
+
+  ngOnDestroy(): void {
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
 }

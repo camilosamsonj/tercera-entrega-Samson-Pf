@@ -26,7 +26,6 @@ export class AlumnosComponent implements OnInit {
 
   students$: Observable<IStudent[]> = of([]);
   loading = false;
-  // studentsSubscription: Observable<IStudent[]> | null = null;
 
   constructor(
     private matDialog: MatDialog,
@@ -131,18 +130,17 @@ export class AlumnosComponent implements OnInit {
             timerProgressBar: true,
             showConfirmButton: false
           });
-        } else if (result.isDenied) {
+        } else if (result.dismiss) {
           Swal.fire({
-            title:'Cancelado',
-            text:  'El alumno está seguro',
+            title: 'Cancelado',
+            text: 'Ningún alumno fue eliminado',
             icon: 'info',
             timer: 1000,
             timerProgressBar: true,
             showConfirmButton: false,
-            
           });
-          console.log('error');
-          }
-        });
+        }
+      });
+    }
   }
-}
+
