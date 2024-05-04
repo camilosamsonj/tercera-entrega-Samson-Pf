@@ -69,14 +69,19 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Acciones</th>
       <td mat-cell *matCellDef="let student">
+        <!--Botón detalles -->
+        <button mat-raised-button color="primary" [routerLink]="['/dashboard/alumnos/', student.id]">
+          <mat-icon> visibility </mat-icon>
+        </button>
+        <!--Botón editar -->
         <button mat-raised-button color="basic" (click)="openDialog(student)">
           <mat-icon> edit </mat-icon>
         </button>
+        <!--Botón eliminar -->
         <button
           mat-raised-button
           color="warn"
-          (click)="onDeleteStudent(student.id)"
-        >
+          (click)="onDeleteStudent(student.id)">
           <mat-icon> delete </mat-icon>
         </button>
       </td>

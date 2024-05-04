@@ -1,3 +1,5 @@
+import { IStudent } from "../../alumnos/models";
+
 export interface ICourse {
 
     code: number;
@@ -5,5 +7,7 @@ export interface ICourse {
     startDate: Date;
     durationMonths: number;
     instructor: string;
+
+    students?: IStudent[];
 
 }

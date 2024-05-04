@@ -25,8 +25,18 @@ const routes: Routes = [
       import('./pages/inscripciones/inscripciones.module').then((m)=>m.InscripcionesModule)
   },
   {
+    path: 'users',
+    loadChildren: ()=>
+      import('./pages/users/users.module').then((m)=>m.UsersModule)
+  },
+  {
     path: '',
     pathMatch: 'full',
+    redirectTo: 'home',
+
+  },
+  {
+    path: '**',
     redirectTo: 'home',
 
   }

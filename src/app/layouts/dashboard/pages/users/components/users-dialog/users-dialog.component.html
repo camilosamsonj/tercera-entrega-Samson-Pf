@@ -1,0 +1,74 @@
+<ng-container *ngIf="editingUser; else createUser">
+    <h2 class="ml-2" mat-dialog-title>Editar Curso</h2>
+  </ng-container>
+  <ng-template #createUser>
+    <h2 mat-dialog-title>Crear Curso</h2></ng-template>
+  
+    <div mat-dialog-content>
+    
+      <form [formGroup]="userForm">
+        <div class="row">
+          <div [ngClass]="{'col-6': !isMobile(), 'col-12': isMobile() }">
+            <mat-form-field 
+              class="w-100 p-2" 
+              appearance="outline">
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="firstName" />
+              <mat-error *ngIf="firstNameControl?.invalid && firstNameControl?.touched">
+                <span *ngIf="firstNameControl?.errors?.['required']">Este es un campo obligatorio</span>
+                <span *ngIf="firstNameControl?.errors?.['pattern']">El nombre debe contener solo letras</span>
+                <span *ngIf="firstNameControl?.errors?.['minlength']">Debe contener al menos 2 caracteres</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div [ngClass]="{'col-6': !isMobile(), 'col-12': isMobile() }">
+            <mat-form-field 
+              class="w-100 p-2" 
+              appearance="outline">
+              <mat-label>Apellido</mat-label>
+              <input formControlName="lastName" matInput />
+              <mat-error *ngIf="lastNameControl?.invalid && lastNameControl?.touched">
+                <span *ngIf="lastNameControl?.errors?.['required']">Este es un campo obligatorio</span>
+                <span *ngIf="lastNameControl?.errors?.['pattern']">El apellido debe contener solo letras</span>
+                <span *ngIf="lastNameControl?.errors?.['minlength']">Debe contener al menos 2 caracteres</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div [ngClass]="{'col-6': !isMobile(), 'col-12': isMobile() }">
+            <mat-form-field 
+              class="w-100 p-2" 
+              appearance="outline">
+              <mat-label>Email</mat-label>
+              <input formControlName="email" matInput placeholder="ejemplo@email.com" />
+              <mat-error *ngIf="emailControl?.invalid && emailControl?.touched">
+                <span *ngIf="emailControl?.errors?.['required']">Este es un campo obligatorio</span>
+                <span *ngIf="emailControl?.errors?.['email']">Ingrese un email válido</span>
+                <span *ngIf="emailControl?.errors?.['pattern']">La dirección de correo no es válida</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div [ngClass]="{'col-6': !isMobile(), 'col-12': isMobile() }">
+            <mat-form-field 
+              class="w-100 p-2" 
+              appearance="outline">
+              <mat-label>Role</mat-label>
+              <mat-select formControlName="role">
+        
+                        <mat-option value="ADMIN">ADMIN</mat-option>
+                        <mat-option value="USER">USER</mat-option>
+                  
+              </mat-select> 
+              <mat-error *ngIf="roleControl?.invalid && roleControl?.touched">
+                <span *ngIf="roleControl?.errors?.['required']">Escoja un rol para el usuario </span>            
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+  
+  <div class="d-flex justify-content-end" mat-dialog-actions>
+    <button mat-dialog-close mat-button>Cancelar</button>
+    <button (click)="onSave()" mat-button >Guardar</button>
+  </div>

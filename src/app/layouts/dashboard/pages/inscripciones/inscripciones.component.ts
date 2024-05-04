@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Observer, of, take, map, delay } from 'rxjs';
 import { ICourse } from '../cursos/models';
-import { CursosService } from '../cursos/cursos.service';
-import { AlumnosService } from '../alumnos/alumnos.service';
 import { IStudent } from '../alumnos/models';
 import { InscripcionesService } from './inscripciones.service';
 
@@ -19,11 +17,6 @@ alumnos$: Observable<IStudent[]> = of([]);
 cursoSeleccionadoId: number | undefined;
 alumnoSeleccionadoId: number | undefined;
 
-displayedColumns: string[] = [
-  'ID Curso',
-  'ID Alumno',
-  ''
-]
 
 constructor(
   private inscripcionesService: InscripcionesService

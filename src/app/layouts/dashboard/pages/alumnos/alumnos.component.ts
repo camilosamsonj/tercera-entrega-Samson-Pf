@@ -7,7 +7,6 @@ import { Observable, delay, map, of, take } from 'rxjs';
 import { AlumnosService } from './alumnos.service';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-alumnos',
   templateUrl: './alumnos.component.html',
@@ -23,7 +22,6 @@ export class AlumnosComponent implements OnInit {
     'actions',
   ];
 
-
   students$: Observable<IStudent[]> = of([]);
   loading = false;
 
@@ -36,19 +34,21 @@ export class AlumnosComponent implements OnInit {
       if (res.matches) {
         this.displayedColumns = ['id', 'firstName', 'actions'];
       } else {
-        this.displayedColumns = [ 'id', 'firstName', 'lastName', 'email', 'anoIngreso', 'actions',           
+        this.displayedColumns = [
+          'id',
+          'firstName',
+          'lastName',
+          'email',
+          'anoIngreso',
+          'actions',
         ];
       }
     });
   }
 
   ngOnInit(): void {
-   this.loadStudents();
-  }
-
-  loadStudents() {
     this.loading = true;
-    this.alumnosService.getAlumnos().pipe(delay(500)).subscribe({
+    this.alumnosService.getAlumnos().subscribe({
       next: (alumnosData: IStudent[]) => {
         this.students$ = of(alumnosData);
       },
@@ -57,8 +57,8 @@ export class AlumnosComponent implements OnInit {
       },
       complete: () => {
         this.loading = false;
-      }
-    })
+      },
+    });
   }
 
   openDialog(editingStudent?: IStudent): void {
@@ -75,7 +75,6 @@ export class AlumnosComponent implements OnInit {
                   ? { ...student, ...result }
                   : student;
               });
-           
             })
           );
           Swal.fire({
@@ -84,63 +83,65 @@ export class AlumnosComponent implements OnInit {
             icon: 'success',
             timer: 1000,
             timerProgressBar: true,
-            showConfirmButton: false  
+            showConfirmButton: false,
           });
         } else {
-            this.students$ = this.students$.pipe(
-              map((students) => {
-                let maxId = students.reduce((max, student) => (student.id > max ? student.id : max), 0);
-                return [...students, { ...result, id: maxId + 1 }];
-              })
-            );
-            Swal.fire({
-              title: '¡Usuario Guardado!',
-              text: '¡El usuario se ha agregado correctamente!',
-              icon: 'success',
-              timer: 1000,
-              timerProgressBar: true, 
-              showConfirmButton: false 
-            });
-          }
-        }
-      });
-    }
-
-    onDeleteStudent(id: number): void {
-      Swal.fire({
-        title: '¿Estás seguro?',
-        text: '¡No podrás revertir esto!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sí, eliminarlo',
-        cancelButtonText: 'No, cancelar',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          if (this.students$) {
-            this.students$ = this.students$.pipe(
-              take(1),
-              map((students) => students.filter((student) => student.id !== id))
-            );
-          }
+          this.students$ = this.students$.pipe(
+            map((students) => {
+              let maxId = students.reduce(
+                (max, student) => (student.id > max ? student.id : max),
+                0
+              );
+              return [...students, { ...result, id: maxId + 1 }];
+            })
+          );
           Swal.fire({
-            title: '¡Eliminado!', 
-            text:   'El alumno ha sido eliminado.',
-            icon:   'success',
-            timer:  1000,
-            timerProgressBar: true,
-            showConfirmButton: false
-          });
-        } else if (result.dismiss) {
-          Swal.fire({
-            title: 'Cancelado',
-            text: 'Ningún alumno fue eliminado',
-            icon: 'info',
+            title: '¡Usuario Guardado!',
+            text: '¡El usuario se ha agregado correctamente!',
+            icon: 'success',
             timer: 1000,
             timerProgressBar: true,
             showConfirmButton: false,
           });
         }
-      });
-    }
+      }
+    });
   }
 
+  onDeleteStudent(id: number): void {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¡No podrás revertir esto!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminarlo',
+      cancelButtonText: 'No, cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (this.students$) {
+          this.students$ = this.students$.pipe(
+            take(1),
+            map((students) => students.filter((student) => student.id !== id))
+          );
+        }
+        Swal.fire({
+          title: '¡Eliminado!',
+          text: 'El alumno ha sido eliminado.',
+          icon: 'success',
+          timer: 1000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
+      } else if (result.dismiss) {
+        Swal.fire({
+          title: 'Cancelado',
+          text: 'Ningún alumno fue eliminado',
+          icon: 'info',
+          timer: 1000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
+      }
+    });
+  }
+}

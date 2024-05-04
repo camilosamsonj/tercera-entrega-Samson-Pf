@@ -1,25 +1,46 @@
-// import { Injectable } from '@angular/core';
-// import { CreateUserPayload } from './models';
-// import {
-//   catchError,
-//   concatMap,
-//   delay,
-//   first,
-//   forkJoin,
-//   Observable,
-//   of,
-//   throwError,
-// } from 'rxjs';
-
-// import { HttpClient } from '@angular/common/http';
-
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class UsersService {
+import { Injectable } from '@angular/core';
+import { CreateUserPayload, IUser } from './models';
+import {
+  catchError,
+  concatMap,
+  delay,
+  first,
+  forkJoin,
+  Observable,
+  of,
+  throwError,
+} from 'rxjs';
 
 
-//   constructor(private httpClient: HttpClient) {}
+let USERS_DB: IUser[] = [ {
 
-//   getUsers(): Ovservabl
-// }
+    id: 101,
+    firstName: 'Camilo',
+    lastName: 'Samson',
+    email: 'camilosamson@outlook.com',
+    role: 'ADMIN',
+    createdAt: new Date,
+    },
+    {
+    id: 102,
+    firstName: 'Andres',
+    lastName: 'Smith',
+    email: 'andressmith@gmail.com',
+    role: 'USER',
+    createdAt: new Date,
+    }
+]
+
+@Injectable({
+  providedIn: 'root',
+})
+
+export class UsersService {
+
+  constructor() {}
+
+  getUsers(): Observable<IUser[]> {
+    return of(USERS_DB);
+     }
+
+}
