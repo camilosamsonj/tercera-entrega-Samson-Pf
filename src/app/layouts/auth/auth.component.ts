@@ -86,5 +86,12 @@ export class AuthComponent implements OnInit, OnDestroy {
       })
     } 
 
+    onKeyDown(event: KeyboardEvent){
+      if (event.key === 'Enter') {
+        this.login();
+        
+      }
+    }
+
   }
 
