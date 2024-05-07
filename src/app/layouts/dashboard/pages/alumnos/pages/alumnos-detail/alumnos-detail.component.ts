@@ -17,8 +17,6 @@ export class AlumnosDetailComponent implements OnInit{
   loading = false;
  
 
-  dataSource: MatTableDataSource<IStudent> = new MatTableDataSource<IStudent>();
-  
   constructor(
     private activatedRoute: ActivatedRoute,
     private alumnosService: AlumnosService
@@ -29,8 +27,7 @@ export class AlumnosDetailComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.student$.subscribe(data => {
-      this.dataSource.data = data ? [data] : [];
-    })
+
+
   }
 }

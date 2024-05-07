@@ -19,7 +19,7 @@ let USERS_DB: IUser[] = [ {
     lastName: 'Samson',
     email: 'camilosamson@outlook.com',
     role: 'ADMIN',
-    createdAt: new Date,
+    createdAt: new Date(2024, 2, 15),
     },
     {
     id: 102,
@@ -27,7 +27,7 @@ let USERS_DB: IUser[] = [ {
     lastName: 'Smith',
     email: 'andressmith@gmail.com',
     role: 'USER',
-    createdAt: new Date,
+    createdAt: new Date(2024, 3, 12),
     }
 ]
 
@@ -42,5 +42,10 @@ export class UsersService {
   getUsers(): Observable<IUser[]> {
     return of(USERS_DB);
      }
+
+
+  getUserById(id: number): Observable<IUser | undefined> {
+    return of(USERS_DB.find((user) => user.id === id ));
+  } 
 
 }

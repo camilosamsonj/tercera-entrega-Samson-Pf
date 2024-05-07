@@ -1,0 +1,41 @@
+<mat-card
+  *ngIf="user$ | async as user"
+  class="d-flex justify-content-center"
+>
+  <mat-card-header>
+    <mat-card-title>
+      Alumno: <b>{{ user.firstName }} {{ user.lastName }}</b> 
+    </mat-card-title>
+  </mat-card-header>
+  <br>
+  <mat-card-content>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Información</th>
+          <th>Detalle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="user$ | async as student">
+          <tr>
+            <td> <b>ID Alumno</b> </td>
+            <td>{{ student.id }}</td>
+          </tr>
+          <tr>
+            <td> <b>Correo Electrónico</b> </td>
+            <td>{{ student.email }}</td>
+          </tr>
+          <tr>
+            <td> <b>Fecha de creación</b> </td>
+            <td>{{ student.role}}</td>
+          </tr>
+          <tr>
+            <td> <b>Fecha de creación</b> </td>
+            <td>{{ student.createdAt | date:'dd/MM/yyyy'  }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>

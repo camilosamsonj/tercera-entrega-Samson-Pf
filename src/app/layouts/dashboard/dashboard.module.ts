@@ -10,9 +10,8 @@ import { InscripcionesModule } from "./pages/inscripciones/inscripciones.module"
 import { UsersModule } from "./pages/users/users.module";
 
 
-
 @NgModule({
-    declarations: [DashboardComponent],
+    declarations: [DashboardComponent ],
     imports: [
         CommonModule,
         SharedModule,
