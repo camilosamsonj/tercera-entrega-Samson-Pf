@@ -10,19 +10,19 @@ const routes: Routes = [
   },
 
   {
-    path: 'alumnos',
+    path: 'students',
     loadChildren: () =>
-        import('./pages/alumnos/alumnos.module').then((m) => m.AlumnosModule),
+        import('./pages/students/students.module').then((m) => m.StudentsModule),
   },
   {
-    path: 'cursos',
+    path: 'courses',
     loadChildren: ()=>
-        import('./pages/cursos/cursos.module').then((m)=>m.CursosModule),
+        import('./pages/courses/courses.module').then((m)=>m.CoursesModule),
   },
   {
-    path: 'inscripciones',
+    path: 'enrollments',
     loadChildren: ()=>
-      import('./pages/inscripciones/inscripciones.module').then((m)=>m.InscripcionesModule)
+      import('./pages/enrollments/enrollments.module').then((m)=>m.EnrollmentsModule)
   },
   {
     path: 'users',

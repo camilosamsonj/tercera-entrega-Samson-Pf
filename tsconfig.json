@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -24,6 +23,9 @@
       "dom"
     ]
   },
+  "include": [
+    "src/app/layouts/dashboard/pages/students/students.module.ts" // Aquí se especifica qué archivos TypeScript incluir en la compilación
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

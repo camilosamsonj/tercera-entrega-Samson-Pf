@@ -1,12 +1,12 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { DashboardComponent } from "./dashboard.component";
-import { AlumnosModule } from "./pages/alumnos/alumnos.module";
-import { SharedModule } from "src/app/shared/shared.module";
+import { StudentsModule } from "./pages/students/students.module";
+import { SharedModule } from "../../shared/shared.module";
 import { HomeModule } from "./pages/home/home.module";
 import { DashboardRoutingModule } from "./dashboard-routing.module";
-import { CursosModule } from "./pages/cursos/cursos.module";
-import { InscripcionesModule } from "./pages/inscripciones/inscripciones.module";
+import { CoursesModule } from "./pages/courses/courses.module";
+import { EnrollmentsModule } from "./pages/enrollments/enrollments.module";
 import { UsersModule } from "./pages/users/users.module";
 
 
@@ -17,10 +17,10 @@ import { UsersModule } from "./pages/users/users.module";
         SharedModule,
         HomeModule,
         DashboardRoutingModule,
-        CursosModule,
-        InscripcionesModule,
+        CoursesModule,
+        EnrollmentsModule,
         UsersModule,
-        AlumnosModule,
+        StudentsModule,
     ],
     exports: [DashboardComponent],
 })

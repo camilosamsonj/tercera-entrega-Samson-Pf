@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ILoginData } from 'src/app/layouts/auth/models';
+
 import { Router } from '@angular/router';
-import { IUser } from 'src/app/layouts/dashboard/pages/users/models';
+
 import { BehaviorSubject, Observable, delay, of } from 'rxjs';
-import Swal from 'sweetalert2';
+import swal from 'sweetalert2';
 import { FormGroup } from '@angular/forms';
+import { IUser } from '../../layouts/dashboard/pages/users/models';
+import { ILoginData } from '../../layouts/auth/models';
 
 @Injectable({
   providedIn: 'root'
@@ -32,14 +34,14 @@ export class AuthService {
       this.router.navigate(['dashboard', 'home']);
       return of(true).pipe(delay(500));   
     } else if (authUserForm.invalid) {
-      Swal.fire({
+      swal.fire({
         title: 'Formulario Invalido',
         icon: 'warning',
         text: 'Por favor complete los campos requeridos'
       });
       return of(false).pipe(delay(500));
     } else {
-      Swal.fire({
+      swal.fire({
         title: 'Correo o password incorrectos',
         icon: 'warning',
         text: 'Por favor intente nuevamente',
@@ -65,15 +67,15 @@ export class AuthService {
   logout(): void {
     this._authUser$.next(null); 
     sessionStorage.removeItem('accessToken');
-    const Toast = Swal.mixin({
+    const Toast = swal.mixin({
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
       timer: 2000,
       timerProgressBar: true,
       didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
+        toast.onmouseenter = swal.stopTimer;
+        toast.onmouseleave = swal.resumeTimer;
       }
     });
     Toast.fire({

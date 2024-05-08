@@ -1,0 +1,50 @@
+{
+  "users": [],
+  "students": [
+    {
+      "firstName": "Camiloasssssssss",
+      "lastName": "Samsonite",
+      "email": "camilosamson@outlook.com",
+      "anoIngreso": 2011,
+      "id": "342a"
+    }
+  ],
+  "courses": [
+    {
+      "name": "Angular",
+      "startDate": "",
+      "durationMonths": 6,
+      "instructor": "Josue Baez",
+      "id": "57e4"
+    },
+    {
+      "name": "Python",
+      "startDate": "",
+      "durationMonths": 4,
+      "instructor": "Mauricio Cuello",
+      "id": "3a3b"
+    },
+    {
+      "name": "React",
+      "startDate": "",
+      "durationMonths": 5,
+      "instructor": "Ana García",
+      "id": "0381"
+    },
+    {
+      "name": "SQL y Bases de Datos",
+      "startDate": "",
+      "durationMonths": 7,
+      "instructor": "María Rodríguez",
+      "id": "d8df"
+    },
+    {
+      "id": "f2cf",
+      "name": "test",
+      "durationMonths": 5,
+      "instructor": "Juan Pérez",
+      "startDate": "2024-02-15T03:00:00.000Z"
+    }
+  ],
+  "enrollments": []
+}

@@ -4,10 +4,10 @@ import { Observable, of, map, take } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from './users.service';
 import { UsersDialogComponent } from './components/users-dialog/users-dialog.component';
-import Swal from 'sweetalert2';
+import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-users$',
+  selector: 'app-users',
   templateUrl: './users.component.html',
 })
 export class UsersComponent implements OnInit {
@@ -60,7 +60,7 @@ export class UsersComponent implements OnInit {
                   : user});
             })
           );
-          Swal.fire({
+          swal.fire({
             title: '¡Cambios Aplicados!',
             text: '¡El usuario se ha editado correctamente!',
             icon: 'success',
@@ -75,7 +75,7 @@ export class UsersComponent implements OnInit {
                 return [...users$, { ...result, id: maxId + 1 }];
               })
             );
-            Swal.fire({
+            swal.fire({
               title: '¡Usuario Guardado!',
               text: '¡El usuario se ha agregado correctamente!',
               icon: 'success',
@@ -89,7 +89,7 @@ export class UsersComponent implements OnInit {
     }
 
     onDeleteUser(id: number): void {
-      Swal.fire({
+      swal.fire({
         title: '¿Estás seguro?',
         text: '¡No podrás revertir esto!',
         icon: 'warning',
@@ -104,7 +104,7 @@ export class UsersComponent implements OnInit {
               map((users) => users.filter((user) => user.id !== id))
             );
           }
-          Swal.fire({
+          swal.fire({
             title: '¡Eliminado!', 
             text:   'El usuario ha sido eliminado.',
             icon:   'success',
@@ -113,7 +113,7 @@ export class UsersComponent implements OnInit {
             showConfirmButton: false
           });
         } else if (result.dismiss) {
-          Swal.fire({
+          swal.fire({
             title: 'Cancelado',
             text: 'Ningún usuario fue eliminado',
             icon: 'info',

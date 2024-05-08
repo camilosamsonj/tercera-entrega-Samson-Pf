@@ -15,6 +15,7 @@ import { MatSelectModule} from '@angular/material/select';
 import { LayoutModule} from '@angular/cdk/layout';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCard, MatCardModule} from '@angular/material/card';
+import Swal from 'sweetalert2';
 
 
 
@@ -42,6 +43,7 @@ import {MatCard, MatCardModule} from '@angular/material/card';
     LayoutModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    
 
 
     

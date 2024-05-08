@@ -6,6 +6,7 @@ import { SharedModule } from './shared/shared.module';
 import { DashboardModule } from './layouts/dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './layouts/auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AuthModule } from './layouts/auth/auth.module';
     DashboardModule,
     BrowserAnimationsModule,
     AuthModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
