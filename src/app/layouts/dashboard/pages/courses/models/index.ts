@@ -15,9 +15,8 @@ export interface ICourse {
 export interface CreateCoursePayload {
     id: number | null;
     name: string | null;
-    startDate: Date | null;
+    startDate: Date;
     durationMonths: number | null;
     instructor: string | null;
 
-    students?: IStudent[] | null;
 }

@@ -20,9 +20,9 @@ const routes: Routes = [
         import('./pages/courses/courses.module').then((m)=>m.CoursesModule),
   },
   {
-    path: 'enrollments',
+    path: 'enrollment',
     loadChildren: ()=>
-      import('./pages/enrollments/enrollments.module').then((m)=>m.EnrollmentsModule)
+      import('./pages/enrollment/enrollment.module').then((m)=>m.EnrollmentModule)
   },
   {
     path: 'users',

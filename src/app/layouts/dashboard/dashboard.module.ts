@@ -6,8 +6,9 @@ import { SharedModule } from "../../shared/shared.module";
 import { HomeModule } from "./pages/home/home.module";
 import { DashboardRoutingModule } from "./dashboard-routing.module";
 import { CoursesModule } from "./pages/courses/courses.module";
-import { EnrollmentsModule } from "./pages/enrollments/enrollments.module";
 import { UsersModule } from "./pages/users/users.module";
+import { EnrollmentModule } from "./pages/enrollment/enrollment.module";
+
 
 
 @NgModule({
@@ -18,9 +19,10 @@ import { UsersModule } from "./pages/users/users.module";
         HomeModule,
         DashboardRoutingModule,
         CoursesModule,
-        EnrollmentsModule,
         UsersModule,
+        EnrollmentModule,
         StudentsModule,
+        
     ],
     exports: [DashboardComponent],
 })

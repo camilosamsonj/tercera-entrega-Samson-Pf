@@ -17,7 +17,7 @@ export class StudentsService {
     return this.httpClient.get<IStudent[]>(environment.baseAPIURL + '/students');
   }
 
-  getStudentById(id: string):Observable<IStudent | undefined> {
+  getStudentById(id: string):Observable<IStudent> {
     return this.httpClient.get<IStudent>(`${environment.baseAPIURL}/students/${id}`);
     // return of(STUDENTS_DB.find((student)=> student.id === id));
   }

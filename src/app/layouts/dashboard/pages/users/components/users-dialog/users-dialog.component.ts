@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { IUser } from '../../models';
 import { Observable, forkJoin, of } from 'rxjs';
-import { UsersService } from '../../users.service';
+
 
 @Component({
   selector: 'app-users-dialog',

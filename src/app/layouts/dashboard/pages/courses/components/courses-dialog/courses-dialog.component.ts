@@ -2,32 +2,26 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ICourse } from '../../models';
-import Swal from 'sweetalert2';
+import swal from 'sweetalert2/dist/sweetalert2.js'
 
 @Component({
-  selector: 'app-cursos-dialog',
-  templateUrl: './cursos-dialog.component.html',
-  styleUrls: ['./cursos-dialog.component.scss']
+  selector: 'app-courses-dialog',
+  templateUrl: './courses-dialog.component.html'
 })
-export class CursosDialogComponent {
+export class CoursesDialogComponent {
   isMobile(): boolean {
     return window.innerWidth < 768;
   }
 
   courseForm: FormGroup;
-  startDate: Date[] = [
-    new Date(2024, 1, 15),   
-    new Date(2024, 3, 10),   
-    new Date(2024, 5, 25),   
-    new Date(2024, 8, 5),    
-    new Date(2024, 10, 20)  
-  ];
+  
 
-  constructor (
+  constructor ( 
+    
     private fb: FormBuilder, 
-    private matDialogRef: MatDialogRef<CursosDialogComponent>,
+    private matDialogRef: MatDialogRef<CoursesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public editingCourse?: ICourse
-  ) {
+     ) {
     this.courseForm = this.fb.group({
       name: [
         '',
@@ -84,7 +78,7 @@ export class CursosDialogComponent {
   onSave(): void {
     if(this.courseForm.invalid) {
       this.courseForm.markAllAsTouched();
-      Swal.fire({
+      swal.fire({
         title: 'Formulario Inválido',
         text: 'Debe completar el formulario, o ingresar datos válidos',
         icon: 'warning',
@@ -92,8 +86,14 @@ export class CursosDialogComponent {
         timerProgressBar: true, 
         showConfirmButton: false 
       });
+      console.log(this.courseForm);
     } else {
-      this.matDialogRef.close(this.courseForm.value);
+      const updatedCourse: ICourse = this.courseForm.value;
+
+      if(this.editingCourse) {
+        updatedCourse.id  = this.editingCourse.id;
+      }
+      this.matDialogRef.close(updatedCourse);
     }
   }
 

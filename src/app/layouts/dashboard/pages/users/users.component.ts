@@ -4,7 +4,7 @@ import { Observable, of, map, take } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from './users.service';
 import { UsersDialogComponent } from './components/users-dialog/users-dialog.component';
-import swal from 'sweetalert2';
+import swal from 'sweetalert2/dist/sweetalert2.js'
 
 @Component({
   selector: 'app-users',

@@ -17,7 +17,7 @@ export class StudentDetailComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
   ) {
     this.loading = true;
     this.student$ = this.studentsService.getStudentById(this.activatedRoute.snapshot.params['id'])

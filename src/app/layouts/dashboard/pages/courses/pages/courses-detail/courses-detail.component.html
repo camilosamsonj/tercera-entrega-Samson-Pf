@@ -1,0 +1,56 @@
+<mat-card
+  *ngIf="course$ | async as course"
+  class="d-flex justify-content-center"
+>
+  <mat-card-header>
+    <mat-card-title>
+      Curso: <b>{{ course.name }}</b> 
+    </mat-card-title>
+  </mat-card-header>
+  <br>
+  <mat-card-content>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Información</th>
+          <th>Detalle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="course$ | async as course">
+        <tr>
+            <td>ID Curso</td>
+            <td>{{ course.id }}</td>
+          </tr>
+          <tr>
+            <td>Fecha de inicio</td>
+            <td>{{ course.startDate }}</td>
+          </tr>
+          <tr>
+            <td>Duración </td>
+            <td>{{ course.durationMonths }} meses</td>
+          </tr>
+          <tr>
+            <td>Instructor </td>
+            <td>{{ course.instructor }} meses</td>
+          </tr>
+          <tr>
+            <td>Alumnos Inscritos</td>
+            <td>
+              <mat-list role="list" *ngFor="let student of course.students">
+                <mat-list>
+                    <mat-list-item>
+                      <span matListItemTitle>Alumno:  </span>
+                      <span matListItemLine> {{student.firstName}}  {{student.lastName}} </span>
+                      <span matListItemTitle>ID Alumno:  </span>
+                      <span matListItemLine> {{student.id}} </span>
+                    </mat-list-item>
+                  </mat-list>
+              </mat-list>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>

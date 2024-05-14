@@ -1,0 +1,19 @@
+<form >
+    <mat-form-field appearance="fill">
+      <mat-label>Select Student</mat-label>
+      <mat-select name="selectedStudent" [(ngModel)]="studentId">
+        <mat-option *ngFor="let student of students" [value]="student.id">{{ student.firstName }} {{ student.lastName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Select Course</mat-label>
+      <mat-select name="selectedCourse" [(ngModel)]="courseId">
+        <mat-option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" (click)="enrollStudent()">Enroll</button>
+    <!-- <button mat-raised-button color="secondary" (click)="unenrollStudent()">UnEnroll</button> -->
+  </form>
+  

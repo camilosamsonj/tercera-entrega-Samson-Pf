@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/core/services/auth.service';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+import { AuthService  } from './../../core/services/auth.service';
+import swal from 'sweetalert2/dist/sweetalert2.js'
 import { ILoginData } from './models';
 
 @Component({
@@ -67,15 +67,15 @@ export class AuthComponent implements OnInit, OnDestroy {
   login(): void {
   this.authService.login(this.authUserForm.value, this.authUserForm).subscribe((loggedIn: boolean)=> {
         if(loggedIn) {
-          const Toast = Swal.mixin({
+          const Toast = swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
             timer: 2000,
             timerProgressBar: true,
             didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
+              toast.onmouseenter = swal.stopTimer;
+              toast.onmouseleave = swal.resumeTimer;
             }
           });
           Toast.fire({

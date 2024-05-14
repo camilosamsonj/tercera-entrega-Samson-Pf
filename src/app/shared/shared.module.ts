@@ -14,8 +14,10 @@ import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-err
 import { MatSelectModule} from '@angular/material/select';
 import { LayoutModule} from '@angular/cdk/layout';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatCard, MatCardModule} from '@angular/material/card';
-import Swal from 'sweetalert2';
+import { MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -43,6 +45,9 @@ import Swal from 'sweetalert2';
     LayoutModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
     
 
 
@@ -63,6 +68,9 @@ import Swal from 'sweetalert2';
     LayoutModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule
   ]
 })
 export class SharedModule { }

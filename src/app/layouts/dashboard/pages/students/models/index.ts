@@ -15,4 +15,5 @@ export interface CreateStudentPayload {
     lastName: string | null;
     email: string | null;
     anoIngreso: number | null;
+    courses? : ICourse[];
 }
