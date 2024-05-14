@@ -4,6 +4,7 @@ import { finalize } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { IStudent } from '../../models';
 import { StudentsService } from '../../students.service';
+import { CoursesService } from '../../../courses/courses.service';
 
 @Component({
   selector: 'app-students-detail',
@@ -18,6 +19,7 @@ export class StudentDetailComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private studentsService: StudentsService,
+    private coursesServices: CoursesService
   ) {
     this.loading = true;
     this.student$ = this.studentsService.getStudentById(this.activatedRoute.snapshot.params['id'])
@@ -28,5 +30,10 @@ export class StudentDetailComponent {
     );
 
   }
+
+
+  
+
+
 
 }
