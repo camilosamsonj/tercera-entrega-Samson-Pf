@@ -70,10 +70,29 @@ export class EnrollmentService {
       );
     }
   
+    unenrollStudentFromCourse(studentId: string, courseId: string, student: IStudent): Observable<IStudent> {
+      if (student.courses && student.courses.length > 0) {
+        student.courses = student.courses.filter(course => course.id.toString() !== courseId);
+      } else {
+        console.warn('El estudiante no tiene cursos inscritos');
+      }
+    
+      return this.httpClient.put<IStudent>(`${this.apiURL}/students/${studentId}`, student).pipe(
+        catchError((error) => {
+          console.error('Error al actualizar el estudiante', error);
+          return throwError(() => new Error(error));
+        }),
+        tap(() => {
+          console.log('Estudiante actualizado después de desinscripción');
+        })
+      );
+    }
+
+
 
     // unenrollStudentFromCourse( studentId: string, courseId: string): Observable<IStudent> {
     //       return this.httpClient.get<IStudent>(`${this.apiURL}/students/${studentId}`).pipe(catchError((error) => {
-    //         return throwError(() => new Error(error));
+    //         return throwError(() => new Error('error al obtener el estudiante', error));
     //       }),
     //     switchMap((student: IStudent) => {
     //       if(student.courses && student.courses.length > 0) {
