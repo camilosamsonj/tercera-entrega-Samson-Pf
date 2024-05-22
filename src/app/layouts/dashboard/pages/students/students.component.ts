@@ -4,9 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { StudentDialogComponent } from './components/student-dialog/student-dialog.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { StudentsService } from './students.service';
-import swal from 'sweetalert2/dist/sweetalert2.js'
+import swal from 'sweetalert2'
 import { CoursesService } from '../courses/courses.service';
-import { EnrollmentService } from '../enrollment/enrollment.service';
+
 
 @Component({
   selector: 'app-students',
@@ -29,8 +29,7 @@ export class StudentsComponent implements OnInit {
     private matDialog: MatDialog,
     private breakingpointObsver: BreakpointObserver,
     private studentsService: StudentsService,
-    private coursesService: CoursesService,
-    private enrollmentService: EnrollmentService
+    private coursesService: CoursesService
   ) {
     this.breakingpointObsver.observe([Breakpoints.Handset]).subscribe((res) => {
       if (res.matches) {
@@ -69,19 +68,18 @@ export class StudentsComponent implements OnInit {
     })
   }
 
-
-
-
   openDialog(editingStudent?: IStudent): void {
+
     this.matDialog
       .open(StudentDialogComponent, {
         data: editingStudent,
+        
       })
       .afterClosed()
       .subscribe({
         next: (result) => {
-          if (result) {
-            if (editingStudent) {
+          if (result && result.id) {
+            if (editingStudent && editingStudent.id) {
                 const updatedStudent: IStudent = {...editingStudent, ...result};
                 this.studentsService.updateStudent(updatedStudent).subscribe({
                   next: () => {
@@ -102,9 +100,7 @@ export class StudentsComponent implements OnInit {
                       showConfirmButton: false,
                     });
                   }
-                })
-              
-             
+                });             
             } else {
               this.studentsService.createStudent(result).subscribe({
                 next: (createdStudent) => {
@@ -113,16 +109,14 @@ export class StudentsComponent implements OnInit {
                 },
               });
               swal.fire({
-                title: '¡Usuario Guardado!',
-                text: '¡El usuario se ha agregado correctamente!',
+                title: 'Alumno Guardado!',
+                text: '¡El alumno se ha agregado correctamente!',
                 icon: 'success',
                 timer: 1000,
                 timerProgressBar: true,
                 showConfirmButton: false,
               });
             }
-
-            
           }
         },
       });
@@ -186,8 +180,7 @@ export class StudentsComponent implements OnInit {
       }
      });
   }
+
+
   
-           
-          
-        
 }

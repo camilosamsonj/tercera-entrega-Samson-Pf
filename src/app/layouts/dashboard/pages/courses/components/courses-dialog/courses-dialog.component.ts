@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ICourse } from '../../models';
-import swal from 'sweetalert2/dist/sweetalert2.js'
+import swal from 'sweetalert2'
 
 @Component({
   selector: 'app-courses-dialog',

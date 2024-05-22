@@ -25,12 +25,12 @@ import { FormsModule } from '@angular/forms';
 
 
 
+
 @NgModule({
   declarations: [
     FormFieldValidationErrorsPipe,
   ],
   imports: [
-    CommonModule,
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
@@ -48,6 +48,8 @@ import { FormsModule } from '@angular/forms';
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
+
+
     
 
 
@@ -70,7 +72,8 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    FormsModule
+    FormsModule,
+
   ]
 })
 export class SharedModule { }

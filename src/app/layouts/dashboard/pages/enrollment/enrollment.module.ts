@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { EnrollmentComponent } from './enrollment.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { EnrollmentRoutingModule } from './enrollment-routing.module';
+import { CommonModule } from '@angular/common';
 
 
 

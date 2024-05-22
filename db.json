@@ -3,19 +3,11 @@
   "students": [
     {
       "id": "1d4c",
-      "firstName": "Camilo",
+      "firstName": "Camiloas",
       "lastName": "Samson",
       "email": "camilosamson@outlook.com",
       "anoIngreso": 2024,
-      "courses": [
-        {
-          "id": "a9a7",
-          "name": "Angular",
-          "durationMonths": 6,
-          "instructor": "Josue Baez",
-          "startDate": "2024-05-22T04:00:00.000Z"
-        }
-      ]
+      "courses": []
     }
   ],
   "courses": [
@@ -25,15 +17,7 @@
       "durationMonths": 6,
       "instructor": "Josue Baez",
       "startDate": "2024-05-22T04:00:00.000Z",
-      "students": [
-        {
-          "id": "1d4c",
-          "firstName": "Camilo",
-          "lastName": "Samson",
-          "email": "camilosamson@outlook.com",
-          "anoIngreso": 2024
-        }
-      ]
+      "students": []
     }
   ]
 }

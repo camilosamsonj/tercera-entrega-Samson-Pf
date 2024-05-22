@@ -32,7 +32,7 @@
           </tr>
           <tr>
             <td>Instructor </td>
-            <td>{{ course.instructor }} meses</td>
+            <td>{{ course.instructor }}</td>
           </tr>
           <tr>
             <td>Alumnos Inscritos</td>
@@ -42,8 +42,8 @@
                     <mat-list-item>
                       <span matListItemTitle>Alumno:  </span>
                       <span matListItemLine> {{student.firstName}}  {{student.lastName}} </span>
-                      <span matListItemTitle>ID Alumno:  </span>
-                      <span matListItemLine> {{student.id}} </span>
+                      <span matListItemLine> ID: {{student.id}} </span>
+                      <!-- <span matListItemLine> Acciones: <button  mat-raised-button color="primary" (click)="unenrollStudent()">Unenroll</button> </span> -->
                     </mat-list-item>
                   </mat-list>
               </mat-list>

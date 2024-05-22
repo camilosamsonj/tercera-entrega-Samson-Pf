@@ -1,14 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ICourse } from './models';
 import { CoursesService } from './courses.service';
-import { Observable, Observer, of, take, map, delay, find } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CoursesDialogComponent} from '../courses/components/courses-dialog/courses-dialog.component'
-import swal from 'sweetalert2/dist/sweetalert2.js'
+import swal from 'sweetalert2';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { EnrollmentService } from '../enrollment/enrollment.service';
 import { StudentsService } from '../students/students.service';
-import { IStudent } from '../students/models';
 
 
 @Component({
@@ -27,6 +25,8 @@ export class CoursesComponent {
 
   loading = false;
   courses: ICourse[] = [];
+  studentId: string = '';
+  courseId: string = '';
 
   constructor(
     private coursesService: CoursesService,
@@ -193,31 +193,6 @@ export class CoursesComponent {
       });
   }
 
-
-  // unenroll(courseId: string, studentId: string): void {
-  //   let course = this.courses.find(course => course.id.toString() === courseId);
-  //   this.studentsService.getStudents()
-  //   .subscribe({
-  //     next: (students: IStudent[]) => {
-  //       students;
-  //       const student = students.find(s => s.id.toString() === studentId);
-  //       if(course && student) {
-  //         this.enrollmentService.unenrollStudentFromCourse(courseId).subscribe({
-  //           next: ()=> {
-  //             course.students = students.filter(s=> s.id.toString() !== studentId);
-  //           }
-  //         })
-  //         this.enrollmentService.removeCourseFromStudent(studentId).subscribe({
-  //           next: () => {
-  //             student.courses = this.courses.filter(course=> course.id.toString() !== courseId) 
-  //           }
-  //         })
-      
-  //       }
-  //     }
-  //   })
-   
-  // }
 
 
 

@@ -5,6 +5,8 @@ import { ICourse } from '../../models';
 import { CoursesService } from '../../courses.service';
 import { ActivatedRoute } from '@angular/router';
 import { StudentsService } from '../../../students/students.service';
+import { IStudent } from '../../../students/models';
+import { EnrollmentService } from '../../../enrollment/enrollment.service';
 
 @Component({
   selector: 'app-courses-detail',
@@ -15,11 +17,11 @@ export class CoursesDetailComponent {
 
   course$: Observable<ICourse | undefined>;
   loading = false;
-  
   constructor(
     private activatedRoute: ActivatedRoute,
     private coursesService: CoursesService,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
+    private enrollmentService: EnrollmentService
   ) {
     this.loading = true;
     this.course$ = this.coursesService.getCourseById(this.activatedRoute.snapshot.params['id'])
@@ -31,6 +33,7 @@ export class CoursesDetailComponent {
     console.log(this.course$);
 
   }
+
 
   
 

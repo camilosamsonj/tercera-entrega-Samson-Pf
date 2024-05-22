@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject, Observable, delay, of } from 'rxjs';
-import swal from 'sweetalert2/dist/sweetalert2.js'
+import swal from 'sweetalert2'
 import { FormGroup } from '@angular/forms';
 import { IUser } from '../../layouts/dashboard/pages/users/models';
 import { ILoginData } from '../../layouts/auth/models';
@@ -73,7 +73,7 @@ export class AuthService {
       showConfirmButton: false,
       timer: 2000,
       timerProgressBar: true,
-      didOpen: (toast) => {
+      didOpen: (toast: any) => {
         toast.onmouseenter = swal.stopTimer;
         toast.onmouseleave = swal.resumeTimer;
       }

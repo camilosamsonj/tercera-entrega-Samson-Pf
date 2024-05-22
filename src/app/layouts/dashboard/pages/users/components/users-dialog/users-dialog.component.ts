@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import Swal from 'sweetalert2';
+import swal from 'sweetalert2';
 import { IUser } from '../../models';
 import { Observable, forkJoin, of } from 'rxjs';
 
@@ -86,7 +86,7 @@ export class UsersDialogComponent {
   onSave(): void {
     if(this.userForm.invalid){
       this.userForm.markAllAsTouched();
-      Swal.fire({
+      swal.fire({
         title: 'Formulario Inválido',
         text: 'Debe completar el formulario, o ingresar datos válidos',
         icon: 'warning',

@@ -9,7 +9,6 @@
       <mat-icon> note_add </mat-icon>
     </button>
   </div>
-  
   <!-- SE UTILIZA EL PIPE ASYNC PARA MOSTRAR LOS DATOS DEL OBSERVABLE -->
   <table  
   [dataSource]="courses"
@@ -17,19 +16,16 @@
   class="d-flex mat-elevation-z8 table-hover"
   mat-table
   class="mat-elevation-z8">
-  
     <!-- ID CURSO -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> Código </th>
       <td mat-cell *matCellDef="let course"> # {{ course.id }} </td>
     </ng-container>
-  
     <!-- NOMBRE CURSO -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Nombre </th>
       <td mat-cell *matCellDef="let course"> {{ course.name }} </td>
     </ng-container>
-  
     <!-- FECHA INICIO CURSO -->
     <ng-container matColumnDef="startDate">
       <th mat-header-cell *matHeaderCellDef> Fecha Inicio </th>
@@ -37,19 +33,16 @@
         {{ course.startDate | date : "dd/MM/yyyy" }}
       </td>
     </ng-container>
-  
     <!-- DURACIÓN CURSO -->
     <ng-container matColumnDef="durationMonths">
       <th mat-header-cell *matHeaderCellDef> Duración </th>
       <td mat-cell *matCellDef="let course"> {{ course.durationMonths }} meses </td>
     </ng-container>
-  
     <!-- INSTRUCTOR CURSO -->
     <ng-container matColumnDef="instructor">
       <th mat-header-cell *matHeaderCellDef> Instructor </th>
       <td mat-cell *matCellDef="let course"> {{ course.instructor }} </td>
     </ng-container>
-  
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let course">

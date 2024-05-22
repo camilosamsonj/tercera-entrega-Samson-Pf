@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService  } from './../../core/services/auth.service';
-import swal from 'sweetalert2/dist/sweetalert2.js'
+import swal from 'sweetalert2'
 import { ILoginData } from './models';
 
 @Component({
