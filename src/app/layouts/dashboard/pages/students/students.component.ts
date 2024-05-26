@@ -78,8 +78,8 @@ export class StudentsComponent implements OnInit {
       .afterClosed()
       .subscribe({
         next: (result) => {
-          if (result && result.id) {
-            if (editingStudent && editingStudent.id) {
+          if (result) {
+            if (editingStudent) {
                 const updatedStudent: IStudent = {...editingStudent, ...result};
                 this.studentsService.updateStudent(updatedStudent).subscribe({
                   next: () => {

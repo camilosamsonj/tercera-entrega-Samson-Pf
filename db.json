@@ -1,15 +1,6 @@
 {
   "users": [],
-  "students": [
-    {
-      "id": "1d4c",
-      "firstName": "Camiloas",
-      "lastName": "Samson",
-      "email": "camilosamson@outlook.com",
-      "anoIngreso": 2024,
-      "courses": []
-    }
-  ],
+  "students": [],
   "courses": [
     {
       "id": "a9a7",
@@ -17,7 +8,15 @@
       "durationMonths": 6,
       "instructor": "Josue Baez",
       "startDate": "2024-05-22T04:00:00.000Z",
-      "students": []
+      "students": [
+        {
+          "id": "18c1",
+          "firstName": "Ignacio",
+          "lastName": "Rojas",
+          "email": "conejo@rabbit.com",
+          "anoIngreso": 2013
+        }
+      ]
     }
   ]
 }

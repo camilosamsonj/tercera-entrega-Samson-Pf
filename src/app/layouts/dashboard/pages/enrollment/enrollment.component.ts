@@ -21,11 +21,17 @@ export class EnrollmentComponent implements OnInit {
   unenrollCourseId: string = '';
   loading: boolean = false;
 
+  
+
+
   constructor(
     private enrollmentService: EnrollmentService,
     private studentsService: StudentsService,
     private coursesService: CoursesService
-  ) { }
+  ) {
+
+
+  }
 
   
 
@@ -78,7 +84,11 @@ export class EnrollmentComponent implements OnInit {
           this.enrollmentService.enrollStudentInCourse(this.studentId, selectedCourse).subscribe({
             next: (enrollmentResponse) => {
               console.log(enrollmentResponse);
-              this.enrollmentService.addStudentsToCourse(this.courseId, selectedStudent);
+              this.enrollmentService.addStudentsToCourse(this.courseId, selectedStudent).subscribe({
+                next: (enrollmentResponse) => {
+                  console.log(enrollmentResponse);
+                }
+              });
             },
             error: (error) => {
               console.log('Error', error);
