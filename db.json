@@ -1,22 +1,23 @@
 {
   "users": [],
-  "students": [],
+  "students": [
+    {
+      "id": "bd04",
+      "firstName": "Camilo",
+      "lastName": "Samson",
+      "email": "camilosamson@outlook.com",
+      "anoIngreso": 2014,
+      "courses": []
+    }
+  ],
   "courses": [
     {
-      "id": "a9a7",
-      "name": "Angular",
-      "durationMonths": 6,
-      "instructor": "Josue Baez",
-      "startDate": "2024-05-22T04:00:00.000Z",
-      "students": [
-        {
-          "id": "18c1",
-          "firstName": "Ignacio",
-          "lastName": "Rojas",
-          "email": "conejo@rabbit.com",
-          "anoIngreso": 2013
-        }
-      ]
+      "id": "c44e",
+      "name": "AAA",
+      "durationMonths": 56,
+      "instructor": "JP",
+      "startDate": "2024-05-18T04:00:00.000Z",
+      "students": []
     }
   ]
 }

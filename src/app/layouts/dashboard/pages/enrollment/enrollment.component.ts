@@ -58,141 +58,66 @@ export class EnrollmentComponent implements OnInit {
     });
   }
 
-
-  // enrollStudent(): void {
-  //   this.studentsService.getStudentById(this.studentId).pipe(
-  //     map((student: IStudent) => {
-  //       const { courses, ...modifiedStudent } = student;
-  //       return modifiedStudent;
-  //     })
-  //   ).subscribe((modifiedStudent: IStudent) => {
-  //     const selectedStudent: IStudent = modifiedStudent;
-  //     this.coursesService.getCourseById(this.courseId).pipe(
-  //       map((course: ICourse) => {
-  //         const { students, ...modifiedCourse } = course;
-  //         return modifiedCourse;
-  //       })
-  //     ).subscribe((modifiedCourse: ICourse) => {
-  //       const selectedCourse: ICourse = modifiedCourse;
-  //       const studentIds = selectedCourse.students?.map((student) => student.id);
-  //       if (!studentIds?.includes(parseInt(this.studentId))) {
-  //         this.enrollmentService.enrollStudentInCourse(this.studentId, selectedCourse).
-          
-  //         subscribe({
-  //           next: (enrollmentResponse) => {
-  //             console.log(enrollmentResponse);
-  //             this.enrollmentService.addStudentsToCourse(this.courseId, selectedStudent)
-              
-              
-  //             .subscribe({
-  //               next: (enrollmentResponse) => {
-  //                 console.log(enrollmentResponse);
-  //               }
-  //             });
-  //           },
-  //           error: (error) => {
-  //             console.log('Error', error);
-  //             swal.fire({
-  //               title: 'Error',
-  //               text: error.error,
-  //               icon: 'error',
-  //               timer: 2000,
-  //               timerProgressBar: true,
-  //               showConfirmButton: false,
-  //             });
-  //           },
-  //           complete: () => {
-  //             swal.fire({
-  //               title: 'Inscripción exitosa!',
-  //               text: `El estudiante: ${modifiedStudent.firstName} ${modifiedStudent.lastName} fue inscrito correctamente en el curso: ${modifiedCourse.name}`,
-  //               icon: 'success',
-  //               timer: 2000,
-  //               timerProgressBar: true,
-  //               showConfirmButton: false,
-  //             });
-  //           },
-  //         });
-  //       } else {
-  //         swal.fire({
-  //           title: 'Error',
-  //           text: 'El estudiante ya se encuentra inscrito en el curso',
-  //           icon: 'error',
-  //           timer: 2000,
-  //           timerProgressBar: true,
-  //           showConfirmButton: false,
-  //         });
-  //       }
-  //     });
-  //   });
-  // }
-
   enrollStudent(): void {
-    this.studentsService.getStudentById(this.studentId).pipe(
-      map((student: IStudent) => {
+    const student$: Observable<IStudent> = this.studentsService.getStudentById(this.studentId);
+  
+    student$.pipe(
+      switchMap((student: IStudent) => {
         const { courses, ...modifiedStudent } = student;
-        return modifiedStudent;
-      })
-    ).subscribe((modifiedStudent: IStudent) => {
-      const selectedStudent: IStudent = modifiedStudent;
-      this.coursesService.getCourseById(this.courseId).pipe(
-        map((course: ICourse) => {
-          const { students, ...modifiedCourse } = course;
-          return modifiedCourse;
-        })
-      ).subscribe((modifiedCourse: ICourse) => {
-        const selectedCourse: ICourse = modifiedCourse;
-        const studentIds = selectedCourse.students?.map((student) => student.id);
-        if (!studentIds?.includes(parseInt(this.studentId))) {
-          this.enrollmentService.enrollStudentInCourse(this.studentId, selectedCourse).pipe(
-            tap(
-            () => {  
-              this.enrollmentService.addStudentsToCourse(this.courseId, selectedStudent);
-            }), 
-          )
-          .subscribe({
-              next: () => {
-                swal.fire({
-                  title: 'Inscripción exitosa!',
-                  text: `El estudiante: ${modifiedStudent.firstName} ${modifiedStudent.lastName} fue inscrito correctamente en el curso: ${modifiedCourse.name}`,
-                  icon: 'success',
-                  timer: 2000,
-                  timerProgressBar: true,
-                  showConfirmButton: false,
-                });
-              },
-              error: (error) => {
-                console.log('Error', error);
-                swal.fire({
-                  title: 'Error',
-                  text: error.error,
-                  icon: 'error',
-                  timer: 2000,
-                  timerProgressBar: true,
-                  showConfirmButton: false,
-                });
-            },
-            complete: () => {
+        return this.coursesService.getCourseById(this.courseId).pipe(
+          tap((course: ICourse) => {
+            const selectedCourse: ICourse = course;
+            const studentIds: string[] = (selectedCourse.students || []).map((student) => student.id.toString());
+            if (studentIds?.includes(this.studentId)) {
+
               swal.fire({
-                title: 'Inscripción exitosa!',
-                text: `El estudiante: ${modifiedStudent.firstName} ${modifiedStudent.lastName} fue inscrito correctamente en el curso: ${modifiedCourse.name}`,
-                icon: 'success',
+                title: 'Error',
+                text: 'El estudiante ya se encuentra inscrito en el curso',
+                icon: 'error',
                 timer: 2000,
                 timerProgressBar: true,
                 showConfirmButton: false,
               });
+            } else {
+              this.enrollmentService.enrollStudentInCourse(this.studentId, selectedCourse).subscribe({
+                next: (enrollmentResponse) => {
+                  enrollmentResponse;
+                  this.enrollmentService.addStudentsToCourse(this.courseId, modifiedStudent).subscribe({
+                    next: (addStudentsResponse) => {
+                      addStudentsResponse;
+                      swal.fire({
+                        title: 'Inscripción exitosa!',
+                        text: `El estudiante fue inscrito correctamente en el curso`,
+                        icon: 'success',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                      });
+                    },
+                    error: (error) => {
+                      throw new Error(`Error al agregar estudiantes al curso: ${error}`);
+                    }
+                  });
+                },
+                error: (error) => {
+                  throw new Error(`Error al inscribir al estudiante en el curso: ${error}`);
+                }
+              });
             }
-          });
-        } else {
-          swal.fire({
-            title: 'Error',
-            text: 'El estudiante ya se encuentra inscrito en el curso',
-            icon: 'error',
-            timer: 2000,
-            timerProgressBar: true,
-            showConfirmButton: false,
-          });
-        }
-      });
+          })
+        );
+      })
+    ).subscribe({
+      error: (error) => {
+        swal.fire({
+          title: 'Error',
+          text: `Error al realizar la inscripción: ${error}`,
+          icon: 'error',
+          timer: 2000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
+      }
     });
   }
   
@@ -221,12 +146,8 @@ export class EnrollmentComponent implements OnInit {
                 switchMap(() => {
                   return this.enrollmentService.updateCourseAfterStudentRemoval(this.unenrollCourseId, this.unenrollStudentId)
                 }),
-                tap((updateResponse) => {
-                  console.log('Curso actualizado luego de la desinscripción: ', updateResponse);
-                }),
                 catchError(error => {
-                  console.error('Error al Actualizar curso: ', error);
-                  return throwError(() => new Error('Error al actualizar curso: '));
+                  return throwError(() =>  (`Error al actualizar curso: ${error}`));
                 })
               );
             } else {
@@ -249,7 +170,6 @@ export class EnrollmentComponent implements OnInit {
       })
     ).subscribe();
   }
-
 }
 
 
@@ -261,144 +181,3 @@ export class EnrollmentComponent implements OnInit {
 
 
 
-// enrollStudent(): void {
-  //   this.studentsService
-  //     .getStudentById(this.studentId)
-  //     .pipe(
-  //       map((student: IStudent) => {
-  //         const { courses, ...modifiedStudent } = student;
-  //         return modifiedStudent;
-  //       })
-  //     )
-  //     .subscribe((modifiedStudent: IStudent) => {
-  //       const selectedStudent: IStudent = modifiedStudent;
-  //       this.coursesService
-  //         .getCourseById(this.courseId).pipe(map((course: ICourse)=> {
-  //           const {students, ...modifiedCourse} = course;
-  //           return modifiedCourse;
-  //         })
-  //       )
-  //         .subscribe((modifiedCourse: ICourse) => {
-  //           const selectedCourse: ICourse = modifiedCourse;
-  //           const studentIds = selectedCourse.students?.map(
-  //             (student) => student.id
-  //           );
-  //           if (!studentIds?.toString().includes(this.studentId)) {
-  //             this.enrollmentService
-  //               .enrollStudentInCourse(this.studentId, selectedCourse)
-  //               .subscribe({
-  //                 next: (enrollmentResponse) => {
-  //                   console.log(enrollmentResponse);
-  //                   this.enrollmentService
-  //                     .addStudentsToCourse(this.courseId, selectedStudent)
-  //                     .subscribe({
-  //                       next: (addresponse) => {
-  //                         console.log(addresponse);
-  //                       },
-  //                       error: (error) => {
-  //                         console.log(
-  //                           'Error al agregar el estudiante a cursos: ',
-  //                           error
-  //                         );
-  //                       },
-  //                     });
-  //                 },
-  //                 error: (error) => {
-  //                   console.log('Error', error);
-  //                   swal.fire({
-  //                     title: 'Error',
-  //                     text: error.error,
-  //                     icon: 'error',
-  //                     timer: 2000,
-  //                     timerProgressBar: true,
-  //                     showConfirmButton: false,
-  //                   });
-  //                 },
-  //                 complete: () => {
-  //                   swal.fire({
-  //                     title: 'Inscripción exitosa!',
-  //                     text: `El estudiante: ${modifiedStudent.firstName} ${modifiedStudent.lastName} fue inscrito correctamente en el curso: ${modifiedCourse.name}`,
-  //                     icon: 'success',
-  //                     timer: 2000,
-  //                     timerProgressBar: true,
-  //                     showConfirmButton: false,
-  //                   });
-  //                 },
-  //               });
-  //           } else {
-  //             swal.fire({
-  //               title: 'Error',
-  //               text: 'El estudiante ya se encuentra inscrito en el curso',
-  //               icon: 'error',
-  //               timer: 2000,
-  //               timerProgressBar: true,
-  //               showConfirmButton: false,
-  //             });
-  //           }
-  //         });
-  //     });
-  // }
-
-
-    // student$.subscribe({
-    //   next: (student: IStudent) => {
-    //     student;
-    //     const course$: Observable<ICourse> = this.coursesService.getCourseById(this.unenrollCourseId)
-    //     course$.subscribe({
-    //       next: (course: ICourse) => {
-    //         course;
-    //         const courseIdsInStudents = student.courses?.map(cId => course.id)
-    //         if(courseIdsInStudents?.includes(course.id)){
-    //         this.enrollmentService
-    //           .unenrollStudentFromCourse(
-    //             this.unenrollStudentId,
-    //             this.unenrollCourseId,
-    //             student
-    //           )
-    //           .pipe(tap((value: ICourse | null) => {
-    //             if(value !== null) {
-    //               swal.fire({
-    //                 title: 'Desinscripción exitosa!',
-    //                 text: `El estudiante ${student.firstName} ${student.lastName} desinscrito del curso ${course.name}`,
-    //                 icon: 'success',
-    //                 timer: 2000,
-    //                 timerProgressBar: true,
-    //                 showConfirmButton: false,
-    //               });
-    //             }
-    //           }  
-    //           )).subscribe();
-                  
-    //               this.enrollmentService
-    //                 .updateCourseAfterStudentRemoval(
-    //                   this.unenrollCourseId,
-    //                   this.unenrollStudentId
-    //                 )
-    //                 .subscribe({
-    //                   next: (updateResponse) => {
-    //                     console.log(
-    //                       'Curso actualizado luego de la desinscripción: ',
-    //                       updateResponse
-    //                     );
-    //                   },
-    //                   error: (error) => {
-    //                     console.log(
-    //                       'Error al actualizar cursos luego de la desinscripción: ',
-    //                       error
-    //                     );
-    //                   }
-    //                 });
-    //         } else {
-    //           swal.fire({
-    //             title: 'Error',
-    //             text: `El estudiante: ${student.firstName} ${student.lastName} no se encuentra inscrito en el curso: ${course.name}`,
-    //             icon: 'error',
-    //             timer: 2000,
-    //             timerProgressBar: true,
-    //             showConfirmButton: false,
-    //           });
-    //           }
-    //       },
-    //     });
-    //   },
-    // });
