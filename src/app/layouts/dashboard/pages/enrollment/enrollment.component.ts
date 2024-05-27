@@ -7,6 +7,7 @@ import { IStudent } from '../students/models';
 import { ICourse } from '../courses/models';
 import { EMPTY, Observable, catchError, map, switchMap, tap, throwError } from 'rxjs';
 
+
 @Component({
   selector: 'app-enrollment',
   templateUrl: './enrollment.component.html',
@@ -21,19 +22,13 @@ export class EnrollmentComponent implements OnInit {
   unenrollCourseId: string = '';
   loading: boolean = false;
 
-  
-
 
   constructor(
     private enrollmentService: EnrollmentService,
     private studentsService: StudentsService,
     private coursesService: CoursesService
-  ) {
+  ) {}
 
-
-  }
-
-  
 
   ngOnInit(): void {
     this.loading = true;
@@ -64,6 +59,73 @@ export class EnrollmentComponent implements OnInit {
   }
 
 
+  // enrollStudent(): void {
+  //   this.studentsService.getStudentById(this.studentId).pipe(
+  //     map((student: IStudent) => {
+  //       const { courses, ...modifiedStudent } = student;
+  //       return modifiedStudent;
+  //     })
+  //   ).subscribe((modifiedStudent: IStudent) => {
+  //     const selectedStudent: IStudent = modifiedStudent;
+  //     this.coursesService.getCourseById(this.courseId).pipe(
+  //       map((course: ICourse) => {
+  //         const { students, ...modifiedCourse } = course;
+  //         return modifiedCourse;
+  //       })
+  //     ).subscribe((modifiedCourse: ICourse) => {
+  //       const selectedCourse: ICourse = modifiedCourse;
+  //       const studentIds = selectedCourse.students?.map((student) => student.id);
+  //       if (!studentIds?.includes(parseInt(this.studentId))) {
+  //         this.enrollmentService.enrollStudentInCourse(this.studentId, selectedCourse).
+          
+  //         subscribe({
+  //           next: (enrollmentResponse) => {
+  //             console.log(enrollmentResponse);
+  //             this.enrollmentService.addStudentsToCourse(this.courseId, selectedStudent)
+              
+              
+  //             .subscribe({
+  //               next: (enrollmentResponse) => {
+  //                 console.log(enrollmentResponse);
+  //               }
+  //             });
+  //           },
+  //           error: (error) => {
+  //             console.log('Error', error);
+  //             swal.fire({
+  //               title: 'Error',
+  //               text: error.error,
+  //               icon: 'error',
+  //               timer: 2000,
+  //               timerProgressBar: true,
+  //               showConfirmButton: false,
+  //             });
+  //           },
+  //           complete: () => {
+  //             swal.fire({
+  //               title: 'Inscripción exitosa!',
+  //               text: `El estudiante: ${modifiedStudent.firstName} ${modifiedStudent.lastName} fue inscrito correctamente en el curso: ${modifiedCourse.name}`,
+  //               icon: 'success',
+  //               timer: 2000,
+  //               timerProgressBar: true,
+  //               showConfirmButton: false,
+  //             });
+  //           },
+  //         });
+  //       } else {
+  //         swal.fire({
+  //           title: 'Error',
+  //           text: 'El estudiante ya se encuentra inscrito en el curso',
+  //           icon: 'error',
+  //           timer: 2000,
+  //           timerProgressBar: true,
+  //           showConfirmButton: false,
+  //         });
+  //       }
+  //     });
+  //   });
+  // }
+
   enrollStudent(): void {
     this.studentsService.getStudentById(this.studentId).pipe(
       map((student: IStudent) => {
@@ -81,25 +143,33 @@ export class EnrollmentComponent implements OnInit {
         const selectedCourse: ICourse = modifiedCourse;
         const studentIds = selectedCourse.students?.map((student) => student.id);
         if (!studentIds?.includes(parseInt(this.studentId))) {
-          this.enrollmentService.enrollStudentInCourse(this.studentId, selectedCourse).subscribe({
-            next: (enrollmentResponse) => {
-              console.log(enrollmentResponse);
-              this.enrollmentService.addStudentsToCourse(this.courseId, selectedStudent).subscribe({
-                next: (enrollmentResponse) => {
-                  console.log(enrollmentResponse);
-                }
-              });
-            },
-            error: (error) => {
-              console.log('Error', error);
-              swal.fire({
-                title: 'Error',
-                text: error.error,
-                icon: 'error',
-                timer: 2000,
-                timerProgressBar: true,
-                showConfirmButton: false,
-              });
+          this.enrollmentService.enrollStudentInCourse(this.studentId, selectedCourse).pipe(
+            tap(
+            () => {  
+              this.enrollmentService.addStudentsToCourse(this.courseId, selectedStudent);
+            }), 
+          )
+          .subscribe({
+              next: () => {
+                swal.fire({
+                  title: 'Inscripción exitosa!',
+                  text: `El estudiante: ${modifiedStudent.firstName} ${modifiedStudent.lastName} fue inscrito correctamente en el curso: ${modifiedCourse.name}`,
+                  icon: 'success',
+                  timer: 2000,
+                  timerProgressBar: true,
+                  showConfirmButton: false,
+                });
+              },
+              error: (error) => {
+                console.log('Error', error);
+                swal.fire({
+                  title: 'Error',
+                  text: error.error,
+                  icon: 'error',
+                  timer: 2000,
+                  timerProgressBar: true,
+                  showConfirmButton: false,
+                });
             },
             complete: () => {
               swal.fire({
@@ -110,7 +180,7 @@ export class EnrollmentComponent implements OnInit {
                 timerProgressBar: true,
                 showConfirmButton: false,
               });
-            },
+            }
           });
         } else {
           swal.fire({
@@ -125,9 +195,7 @@ export class EnrollmentComponent implements OnInit {
       });
     });
   }
-
   
-
   unenrollStudent(): void {
     const student$: Observable<IStudent> = this.studentsService.getStudentById(this.unenrollStudentId);
     
