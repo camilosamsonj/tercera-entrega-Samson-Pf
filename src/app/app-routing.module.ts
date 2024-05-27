@@ -8,7 +8,7 @@ const routes: Routes = [
 
   {
     path: 'dashboard',
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     component: DashboardComponent,
     loadChildren: ()=> 
       import('./layouts/dashboard/dashboard.module')
